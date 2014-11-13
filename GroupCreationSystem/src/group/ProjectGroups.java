@@ -8,7 +8,7 @@ import test.BasicDistributionStrategy;
 import utility.Group;
 import utility.Student;
 
-public class GroupCreator {
+public class ProjectGroups {
 	
 	private Collection<Group> groups;
 	private Collection<Student> unassignedStudents;

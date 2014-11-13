@@ -28,13 +28,11 @@ public class BasicDistributionStrategy implements CreateGroupStrategy{
 		for(Student s: students){
 			boolean added=false;
 			for(Group g: groups){
-				if(g.Compatible(s)){
-					g.add(s);
+				added=g.add(s);
+				if(added){
 					unassignedStudents.remove(s);
-					added=true;
 				}
 
-				
 			}
 			if(!added) displayWarning();
 		}

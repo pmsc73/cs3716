@@ -13,13 +13,46 @@ public class Student {
 	private ClassSchedule schedule;
 	private Collection<Question> questionnaire;
 	
-	public boolean compatible (Student s){
-		//CompatibleStrategy strategy = new CompatibleStrategy();//commented out for testing purposes only
-		//strategy.compatible(this, s);
-		return false; //for testing purposes only
+	public Student(String name, String id){
+		this.name=name;
+		this.id=id;
 	}
+	
 
+	
 	public void answerQuestion(int questionNumber){
 		
 	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public Schedule getPersonalSched() {
+		return personalSched;
+	}
+
+
+	public Collection<Question> getQuestionnaire() {
+		return questionnaire;
+	}
+
+	
+	public void setQuestionnaire(Collection<Question> questionnaire) {
+		this.questionnaire = questionnaire;
+	}
+
+
+	public ClassSchedule getSchedule() {
+		return schedule;
+	}
 }
+
