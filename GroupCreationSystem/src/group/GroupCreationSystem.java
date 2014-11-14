@@ -13,12 +13,12 @@ public class GroupCreationSystem {
 	private boolean skillBased;
 	private double deadline;
 	private String instructor;
-	private GroupCreator creator;
+	private ProjectGroups creator;
 	boolean initialized;
 	private Collection<Student> allStudents;
 	
 	public GroupCreationSystem(){
-		creator=new GroupCreator();
+		creator=new ProjectGroups();
 		initialized=false;
 	}
 	

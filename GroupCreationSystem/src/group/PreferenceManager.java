@@ -5,21 +5,21 @@ import java.util.Collection;
 import utility.Student;
 
 public class PreferenceManager {
-	private Collection<Collection<Student>> requiredGroups;
-	private Collection<Collection<Student>> disallowedGroups;
-	private Collection<Collection<Student>> requestedGroups;
-	private Collection<Collection<Student>> unpreferredGroups;
+	private Collection<Preference> requiredGroups;
+	private Collection<Preference> disallowedGroups;
+	private Collection<Preference> requestedGroups;
+	private Collection<Preference> unpreferredGroups;
 	
-	public Collection<Collection<Student>> getInstructorPreferences(){
+	public Collection<Preference> getInstructorPreferences(){
 		return requiredGroups;
 	}
-	public Collection<Collection<Student>> getInstructorDisallowed(){
+	public Collection<Preference> getInstructorDisallowed(){
 		return disallowedGroups;
 	}
-	public Collection<Student> getStudentPreferences(Student s){
+	public Preference getStudentPreferences(Student s){
 		return null;
 	}
-	public Collection<Student> getStudentUnPreferred(Student s){
+	public Preference getStudentUnPreferred(Student s){
 		return null;
 	}
 	public void addPreference(Student s1, Student s2, boolean preferred){
