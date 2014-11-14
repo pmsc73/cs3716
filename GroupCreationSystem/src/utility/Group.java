@@ -2,29 +2,31 @@ package utility;
 
 import java.util.Collection;
 public class Group{
-	int MAXSTUDENTS;
-	int numStudents;
-	Collection<Student> members;
+	
+	private int MAXSTUDENTS;
+	private int numStudents;
+	private Collection<Student> members;
 	
 	public Group(int max){
 		MAXSTUDENTS=max;
 	}
+
 	
-	public boolean Compatible(Student s){
-		if(numStudents>MAXSTUDENTS){
-			//check other conditions in here first, then
+	public boolean add(Student s){
+		
+		if(numStudents<MAXSTUDENTS){
+			members.add(s);
 			return true;
 		}
 		else return false;
-	
-	}
-	
-	public void add(Student s){
 		
 	}
 	
 	public void remove(Student s){
 	
+	}
+	public Collection<Student> getGroupMembers(){
+		return members;
 	}
 
 	public boolean isFull() {

@@ -2,7 +2,7 @@ package test;
 
 import java.util.ArrayList;
 
-import group.GroupCreator;
+import group.ProjectGroups;
 
 public class GroupCreatorTest {
 	public static void main(String[] args){
@@ -12,7 +12,7 @@ public class GroupCreatorTest {
 	}
 	public static void testMemberDivision(int total, int groupsize){
 		System.out.println("Dividing "+ total+" members into groups of " +groupsize);
-		GroupCreator x=new GroupCreator();
+		ProjectGroups x=new ProjectGroups();
 		ArrayList<Integer> ints;
 		ints=(ArrayList<Integer>) x.calculateGroupSizes(total, groupsize);
 		int total2=0;
