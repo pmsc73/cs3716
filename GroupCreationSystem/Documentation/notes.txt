@@ -1,0 +1,2 @@
+~Added Preference class from Philip/Matthew's assignment 3, PreferenceManager now manages these
+~GroupCreator changed to ProjectGroups
