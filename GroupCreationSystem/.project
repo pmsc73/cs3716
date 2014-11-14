@@ -14,4 +14,17 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>iterationplan week 1.odt</name>
+			<type>1</type>
+			<locationURI>copy_PARENT/SkyDrive/School/CS%203716/Assignment%203/iterationplan%20week%201.odt</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>copy_PARENT</name>
+			<value>$%7BPARENT-2-ECLIPSE_HOME%7D</value>
+		</variable>
+	</variableList>
 </projectDescription>
