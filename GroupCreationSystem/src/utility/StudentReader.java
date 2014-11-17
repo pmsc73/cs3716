@@ -38,9 +38,12 @@ public class StudentReader {
 				line.useDelimiter(","); 
 				String name;
 				String number;
-				while (!((name=line.next())==null) && !((number=line.next())==null)) {
-					// this ensures all students will have non-null fields
-					studentList.add(new Student(name,number));
+				while(line.hasNext()) {
+					name = line.next();
+					if(line.hasNext()) {
+						number = line.next();
+						studentList.add(new Student(name,number));
+					}
 				}
 				line.close(); // eclipse suggest I close my scanners
 			}
