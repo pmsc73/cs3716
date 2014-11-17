@@ -15,7 +15,6 @@ public class ProjectGroups {
 	private PreferenceManager preferences;
 	private QuestionnaireManager questionnaire;
 	public Collection<Group> createEmptyGroups(int numStudents, int maxCap){
-		
 			Collection<Integer> groupSizes=calculateGroupSizes(numStudents,maxCap);
 			groups=new ArrayList<Group>();
 			for(Integer i: groupSizes){
