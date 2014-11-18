@@ -14,6 +14,11 @@ public class ProjectGroups {
 	private Collection<Student> unassignedStudents;
 	private PreferenceManager preferences;
 	private QuestionnaireManager questionnaire;
+	
+	public ProjectGroups(Collection<Student> allStudents){
+		preferences=new PreferenceManager();
+		unassignedStudents=allStudents;
+	}
 	public Collection<Group> createEmptyGroups(int numStudents, int maxCap){
 			Collection<Integer> groupSizes=calculateGroupSizes(numStudents,maxCap);
 			groups=new ArrayList<Group>();
@@ -50,5 +55,12 @@ public class ProjectGroups {
 
 	public void setSkillBased() {
 		QuestionnaireManager questionnaire= new QuestionnaireManager();
+	}
+
+	/**
+	 * @return The collection of groups for the project group
+	 */
+	public Collection<Group> getGroups() {
+		return groups;
 	}
 }

@@ -6,6 +6,11 @@ import questionnaire.Question;
 import schedule.ClassSchedule;
 import schedule.Schedule;
 
+/****
+ * Class to represent a student
+ * @author Emily
+ *
+ */
 public class Student {
 	private String name;
 	private String id;
@@ -28,7 +33,6 @@ public class Student {
 	public String getName() {
 		return name;
 	}
-
 
 
 	public String getId() {
