@@ -54,7 +54,7 @@ public class ProjectGroups {
 	}
 
 	public void setSkillBased() {
-		QuestionnaireManager questionnaire= new QuestionnaireManager();
+		questionnaire= new QuestionnaireManager(); // fixed
 	}
 
 	/**
