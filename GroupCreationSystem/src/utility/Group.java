@@ -1,30 +1,59 @@
 package utility;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+/****
+ * Class to represent a group
+ * 
+ * @author Emily
+ *
+ ****/
 public class Group{
 	
 	private int MAXSTUDENTS;
 	private int numStudents;
 	private Collection<Student> members;
+	private String groupName;
 	
 	public Group(int max){
 		MAXSTUDENTS=max;
+		members=new ArrayList<Student>();
 	}
 
-	
+	/****
+	 * Method to add a student to a group. Will only add a student if the group isn't full.
+	 * 
+	 ****/
 	public boolean add(Student s){
 		
 		if(numStudents<MAXSTUDENTS){
 			members.add(s);
+			numStudents++;
 			return true;
+			
 		}
 		else return false;
 		
 	}
-	
-	public void remove(Student s){
+	/****
+	 * Method to remove a student from a group. Returns true if the student was sucessfully removed.
+	 * 
+	 ****/
+	public boolean remove(Student s){
+		boolean removed = members.remove(s);
+		if(removed) numStudents--;
+		return removed;
 	
 	}
+	public void setName(String s){
+		groupName=s;
+	}
+	
+	public String getName(){
+		return groupName;
+	}
+	
 	public Collection<Student> getGroupMembers(){
 		return members;
 	}
@@ -32,6 +61,17 @@ public class Group{
 	public boolean isFull() {
 		if(numStudents>=MAXSTUDENTS) return true;
 		else return false;
+	}
+
+	/**
+	 * Test method
+	 */
+	public void printGroup() {
+		for(Student s: members){
+			System.out.println(s.getName());
+		}
+		System.out.println("____________________");
+		
 	}
 
 
