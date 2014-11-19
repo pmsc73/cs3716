@@ -1,5 +1,6 @@
 package group;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import utility.Group;
@@ -20,7 +21,7 @@ public class GroupCreationSystem {
 	private GroupManager creator;
 	boolean initialized;
 	private Collection<Student> allStudents;
-	
+
 	public GroupCreationSystem(){
 		initialized=false;
 	}
@@ -31,10 +32,13 @@ public class GroupCreationSystem {
 	public Collection<Group> startEmptyGroups(){
 		initialize();
 		allStudents=Registrar.getStudents(courseNumber);
+		ArrayList<Student> copy = new ArrayList<Student>();
 		for(Student s: allStudents){
 			Registrar.getSchoolSchedule(s);
+			copy.add(s);
 		}
-		creator= new GroupManager(allStudents);
+		
+		creator= new GroupManager(copy);
 		creator.createEmptyGroups(allStudents.size(), groupSize);
 		if(skillBased){
 			creator.setSkillBased();

@@ -6,6 +6,7 @@ import java.util.Collection;
 import utility.Group;
 import utility.Student;
 import utility.StudentFileReader;
+import group.Controller;
 import group.GroupCreationSystem;
 import group.GroupManager;
 
@@ -17,12 +18,12 @@ import group.GroupManager;
 public class GroupCreatorTest {
 	public static void main(String[] args){
 		//testMemberDivision(29,5);
-		testMemberDivision(28,5);
-		testMemberDivision(26,5);
-		testMemberDivision(6,2);
-		testMemberDivision(40, 3);
+		//testMemberDivision(28,5);
+		//testMemberDivision(26,5);
+		//testMemberDivision(6,2);
+		//testMemberDivision(40, 3);
 		//importTest("cs3716.dat");
-		//systemTest();
+		controllerTest();
 	}
 	/****
 	 * Method to test that the groups are created with appropriate maximum student values
@@ -44,15 +45,44 @@ public class GroupCreatorTest {
 	/*****
 	 * Method to test that students are properly added to groups
 	 ****/
-/*	public static void systemTest() {
-		GroupCreationSystem sys = new GroupCreationSystem();
-		sys.startEmptyGroups("cs3716", 2, false, 234029345, "testname");
-		sys.addStudentsToGroups();
-		Collection<Group> groups = sys.getGroups();
+	public static void controllerTest() {
+		Controller control = new Controller();
+		control.setGroupSize(3);
+		control.setCourseNumber("cs3716");
+		control.finalizeParameters();
+		control.generateGroups();
+		Collection<Group> groups = control.getGroups();
+		Collection<Student> students =control.getAllStudents();
+		Object[] students2 =  students.toArray();
+		Object[] groups2=  groups.toArray();
+		System.out.println("Generated these groups:\n______________________");
 		for(Group g: groups){
 			g.printGroup();
+		
 		}
-	}*/
+		System.out.println("Removing "+ students2[0]+" and "+students2[4]+"\n_____________________");
+		control.removeStudent((Student)students2[4], (Group)groups2[1]);
+		control.removeStudent((Student)students2[0], (Group)groups2[0]);
+		System.out.println("New groups are:\n_____________________");
+		for(Group g: groups){
+			g.printGroup();
+		
+		}
+		Collection<Student> groupless= control.getUnassignedStudents();
+		System.out.println("Unassigned Students!:");
+		for(Student s: groupless){
+			System.out.println(s);
+		}
+
+		System.out.println("__________________");
+		System.out.println("Readding unassigned students");
+		control.generateGroups();
+		System.out.println("New groups are:\n_____________________");
+		for(Group g: groups){
+			g.printGroup();
+		
+		}
+	}
 	public static void importTest(String path){
 		StudentFileReader read = new StudentFileReader();
 		Collection<Student> list = read.getList(path);

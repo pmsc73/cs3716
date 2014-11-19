@@ -64,11 +64,32 @@ public class Controller {
 		return sys.getStudents();
 	}
 	/****
+	 * This method gives all of the unassigned students
+	 */
+	public Collection<Student> getUnassignedStudents(){
+		return sys.getGroupManager().getUnaddedStudents();
+	}
+	/****
 	 * This method removes a student from a group. Might throw an exception in the future if the student couldn't be removed
 	 ****/
 	public void removeStudent(Student s, Group g){
 		GroupManager creator = sys.getGroupManager();
 		boolean b=creator.removeStudent(s, g);
 		if(!b); //throw exception? We'll figure this out later
+	}
+	/****
+	 * This method adds a student to a group. Probably will throw an exception if unsuccessful
+	 ****/
+	public void addStudent(Student s, Group g){
+		GroupManager creator = sys.getGroupManager();
+		if(g.isFull())//show warning or something
+		creator.addStudent(s, g);
+		
+	}
+	/****
+	 * Starts the group generation process. Should probably throw an exception later.
+	 ****/
+	public void generateGroups(){
+		sys.addStudentsToGroups();
 	}
 }

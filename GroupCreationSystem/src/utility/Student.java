@@ -10,7 +10,7 @@ import schedule.Schedule;
  * Class to represent a student
  * @author Emily
  *
- */
+ ****/
 public class Student {
 	private String name;
 	private String id;
@@ -61,6 +61,9 @@ public class Student {
 	public String toString(){
 		String s = name+", "+id;
 		return s;
+	}
+	public boolean equals(Object o){
+		return(this.name.equals(((Student)o).name)&&this.id.equals(((Student)o).id));
 	}
 }
 
