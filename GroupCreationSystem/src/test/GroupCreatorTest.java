@@ -22,7 +22,7 @@ public class GroupCreatorTest {
 		testMemberDivision(6,2);
 		testMemberDivision(40, 3);
 		//importTest("cs3716.dat");
-		systemTest();
+		//systemTest();
 	}
 	/****
 	 * Method to test that the groups are created with appropriate maximum student values
@@ -44,15 +44,15 @@ public class GroupCreatorTest {
 	/*****
 	 * Method to test that students are properly added to groups
 	 ****/
-	public static void systemTest() {
+/*	public static void systemTest() {
 		GroupCreationSystem sys = new GroupCreationSystem();
-		sys.createGroups("cs3716", 2, false, 234029345, "testname");
+		sys.startEmptyGroups("cs3716", 2, false, 234029345, "testname");
 		sys.addStudentsToGroups();
 		Collection<Group> groups = sys.getGroups();
 		for(Group g: groups){
 			g.printGroup();
 		}
-	}
+	}*/
 	public static void importTest(String path){
 		StudentFileReader read = new StudentFileReader();
 		Collection<Student> list = read.getList(path);
