@@ -7,7 +7,7 @@ import utility.Group;
 import utility.Student;
 import utility.StudentFileReader;
 import group.GroupCreationSystem;
-import group.ProjectGroups;
+import group.GroupManager;
 
 /**
  * Test class to make sure that the system divides the students into reasonably sized groups
@@ -31,7 +31,7 @@ public class GroupCreatorTest {
 	 ****/
 	public static void testMemberDivision(int total, int groupsize){
 		System.out.println("Dividing "+ total+" members into groups of " +groupsize);
-		ProjectGroups x=new ProjectGroups(null);
+		GroupManager x=new GroupManager(null);
 		ArrayList<Integer> ints;
 		ints=(ArrayList<Integer>) x.calculateGroupSizes(total, groupsize);
 		int total2=0;
