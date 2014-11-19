@@ -25,30 +25,20 @@ public class GroupSizeGUI extends JFrame {
 
 	private JPanel contentPane;
 	private String courseName;
+	private boolean done;
 	private int groupSize;
 	private Controller controller;
-
-	/**
-	 * Launch the application.
-	 */
-	public void start() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GroupSizeGUI frame = new GroupSizeGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	public boolean getStatus() {
+		return done;
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public GroupSizeGUI(Controller controller) {
-		this.controller = controller;
+	public GroupSizeGUI(Controller control) {
+		this.controller = control;
+		done = false;
 		setTitle("Enter Group Size");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(260,175);
@@ -78,12 +68,9 @@ public class GroupSizeGUI extends JFrame {
 				if(courseName.equals("")) {
 					return;
 				}
-				
-				GroupProjectGUI projGui = new GroupProjectGUI();
-				controller.setCourseName(courseName);
-				controller.setGroupSize()
-				projGui.setVisible(true);
-				setVisible(false);
+				controller.setCourseNumber(courseName);
+				controller.setGroupSize(groupSize);
+				done = true;
 			}
 		});
 		
