@@ -1,24 +1,33 @@
 /**
- * @Author-Noah, Matthew
+ * @Author-Noah
  */
 
 package gui;
 import group.*;
+
 import java.util.Collection;
+
 import utility.*;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
 
 
@@ -46,16 +55,8 @@ public class GroupProjectGUI extends JFrame {
 
 	/**
 	 * Create the frame.
-	 */ 
+	 */
 	public GroupProjectGUI(Controller controller) {
-		/*
-		 * Logic
-		 */
-		int numOfGroups = controller.getGroupSize();
-		String[] groupNames= new String[numOfGroups];
-		for (int i=0; i<numOfGroups; i++){
-			groupNames[i]="Group "+i;
-		}
 		
 		setTitle("Group Creation System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,18 +72,25 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(groupsPanel);
 		groupsPanel.setLayout(null);
 		
-		JList groupList = new JList();
+		
+		int numOfGroups = controller.getGroupSize();
+		DefaultListModel groupModel=new DefaultListModel();
+		for (int i=0; i<numOfGroups; i++){
+			groupModel.addElement("Group"+i);
+		}
+		JList groupList = new JList(groupModel);
 		groupList.setBounds(0, 0, 109, 230);
 		groupList.setBorder(null);
-		groupList.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Group 1", "Group 2", "Group 3", "Group 4", "Group 5", "Group 6"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
+		
+		Collection<Group> groups = controller.getGroups();
+		
+		groupList.addListSelectionListener(new ListSelectionListener(){
+			
+			public void valueChanged(ListSelectionEvent arg){
 			}
 		});
+		
+		
 		
 		JScrollPane scrlGroups = new JScrollPane();
 		scrlGroups.setViewportBorder(null);
