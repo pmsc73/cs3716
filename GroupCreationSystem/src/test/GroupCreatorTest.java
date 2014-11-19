@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import utility.Group;
+import utility.Student;
+import utility.StudentFileReader;
 import group.GroupCreationSystem;
 import group.ProjectGroups;
 
@@ -15,9 +17,12 @@ import group.ProjectGroups;
 public class GroupCreatorTest {
 	public static void main(String[] args){
 		//testMemberDivision(29,5);
-		//testMemberDivision(28,5);
-	//	testMemberDivision(26,5);
-		systemTest();
+		testMemberDivision(28,5);
+		testMemberDivision(26,5);
+		testMemberDivision(6,2);
+		testMemberDivision(40, 3);
+		importTest("/src/test/cs3716.dat");
+		//systemTest();
 	}
 	/****
 	 * Method to test that the groups are created with appropriate maximum student values
@@ -47,5 +52,13 @@ public class GroupCreatorTest {
 		for(Group g: groups){
 			g.printGroup();
 		}
+	}
+	public static void importTest(String path){
+		StudentFileReader read = new StudentFileReader();
+		Collection<Student> list = read.getList(System.getProperty("user.dir")+path);
+		for(Student s: list){
+			System.out.println(s);
+		}
+		
 	}
 }

@@ -58,5 +58,9 @@ public class Student {
 	public ClassSchedule getSchedule() {
 		return schedule;
 	}
+	public String toString(){
+		String s = name+", "+id;
+		return s;
+	}
 }
 
