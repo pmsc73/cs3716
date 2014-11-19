@@ -46,7 +46,7 @@ public class GroupProjectGUI extends JFrame {
 
 	/**
 	 * Create the frame.
-	 */
+	 */ 
 	public GroupProjectGUI(Controller controller) {
 		/*
 		 * Logic

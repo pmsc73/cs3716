@@ -23,15 +23,14 @@ public class View {
 		View view = new View();
 
 		sizeGui = new GroupSizeGUI(view.controller);
-		while(!(sizeGui.getStatus())) {
+		while(!(sizeGui.getStatus()))
 			sizeGui.setVisible(true);
-		}
+		
 		sizeGui.setVisible(false);
 		projGui = new GroupProjectGUI(view.controller);
-		while(true) {
-			projGui.setVisible(true);
-		}
-		
+
+		projGui.setVisible(true);
+				
 	}
 
 }
