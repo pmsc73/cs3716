@@ -78,12 +78,11 @@ public class GroupManager {
 		return b;
 	}
 	/****
-	 * Add a student to a group
+	 * Add a student to a group. This method will add a student to a full group, so  be careful
 	 ****/
-	public boolean addStudent(Student s, Group g){
-		boolean b= g.add(s);
-		if(b) unassignedStudents.remove(s);
-		return b;
+	public void addStudent(Student s, Group g){
+		g.add(s);
+		unassignedStudents.remove(s);
 	}
 	//not really used (yet?)
 	public void addRemainingStudents(Collection<Student> students){
@@ -108,5 +107,12 @@ public class GroupManager {
 	 */
 	public Collection<Group> getGroups() {
 		return groups;
+	}
+
+	/**
+	 * @return
+	 */
+	public Collection<Student> getUnaddedStudents() {
+		return unassignedStudents;
 	}
 }

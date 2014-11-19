@@ -25,15 +25,14 @@ public class Group{
 	 * Method to add a student to a group. Will only add a student if the group isn't full.
 	 * 
 	 ****/
-	public boolean add(Student s){
+	public  void add(Student s){
 		
-		if(numStudents<MAXSTUDENTS){
+		//if(numStudents<MAXSTUDENTS){
 			members.add(s);
 			numStudents++;
-			return true;
 			
-		}
-		else return false;
+		//}
+		//else return false;
 		
 	}
 	/****
