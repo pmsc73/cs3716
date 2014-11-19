@@ -5,7 +5,6 @@
  * of Student objects.
  * 
  * @author pmsc73
- * Updated 11/14/2014
  */
 
 
@@ -18,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class StudentFileReader implements StudentReader {
+	
 	public Collection<Student> getList(String path) {
 		/**
 		 * Only method that actually gets used in the class. Is full
@@ -29,7 +29,7 @@ public class StudentFileReader implements StudentReader {
 		try { // needs to be in try block because Scanner throws FileNotFound
 			
 			// Scanner for entire file
-			Scanner fsc = new Scanner(new File(path)); 
+			Scanner fsc = new Scanner(new File(System.getProperty("user.dir")+"/src/test/"+path)); 
 			while(fsc.hasNextLine()) {
 				// current line scanner
 				Scanner line = new Scanner(fsc.nextLine()); 
