@@ -85,8 +85,8 @@ public class Controller {
 	 ****/
 	public void addStudent(Student s, Group g){
 		GroupManager creator = sys.getGroupManager();
-		if(g.isFull())//show warning or something
 		creator.addStudent(s, g);
+		if(g.isFull());//throw an exception
 		
 	}
 	/****
@@ -94,5 +94,20 @@ public class Controller {
 	 ****/
 	public void generateGroups(){
 		sys.addStudentsToGroups();
+	}
+	
+	/****
+	 * Gets the group members from a group with a given name.
+	 * @param groupName - name of the group
+	 * @return members in the group with groupName.
+	 ****/
+	public Collection<Student> getStudentsFromGroup(String groupName){
+		Group g = new Group(0);
+		g.setName(groupName);
+		for(Group x: sys.getGroups()){
+			if (x.equals(g)) return x.getGroupMembers();
+		}
+		return null;
+		
 	}
 }

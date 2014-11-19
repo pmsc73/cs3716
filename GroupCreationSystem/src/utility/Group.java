@@ -61,7 +61,10 @@ public class Group{
 		if(numStudents>=MAXSTUDENTS) return true;
 		else return false;
 	}
-
+	
+	public boolean equals(Object o){
+		return ((Group)o).groupName.equals(this.groupName);
+	}
 	/**
 	 * Test method
 	 */
