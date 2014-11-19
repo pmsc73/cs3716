@@ -4,6 +4,7 @@ Clicking on a group displays the members in said group in the group members pane
 Group members panel: another jPanel with jList inside, simply populates list with members of currently selected group. 
 Clicking on a member's name and then clicking "MOVE" will display another jFrame with a just a jList that asks the user where they want to move the member. 
 Double clicking (should we use another selection method?) confirms selection and moves member from current group to selected one.
+^^ Perhaps have a "Confirm" button to move things, instead of double clicking? (Philip)
 
 Unassigned panel: jPanel with (SURPRISE!) a jList inside it. Users that, for whatever reason, cannot be assigned to a group or have been removed from one are placed here. 
 This panel is akin to a neutral group with no association and is not a valid group to use in a project.
