@@ -9,6 +9,8 @@ import utility.Group;
 import utility.Student;
 
 /****
+ * Controller class which contains all of the methods that the GUI might need. Responsible for
+ * delegating work to other classes.
  * @author Emily
  *
  ****/
@@ -19,6 +21,7 @@ public class Controller {
 	public Controller(){
 		sys=new GroupCreationSystem();
 	}
+	
 	public void setCourseNumber(String num){
 		sys.setCourseNumber(num);
 	}
@@ -64,7 +67,7 @@ public class Controller {
 		return sys.getStudents();
 	}
 	/****
-	 * This method gives all of the unassigned students
+	 * This method gives all of the students that haven't been assigned to groups
 	 */
 	public Collection<Student> getUnassignedStudents(){
 		return sys.getGroupManager().getUnaddedStudents();

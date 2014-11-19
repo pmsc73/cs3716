@@ -50,8 +50,8 @@ public class GroupSizeGUI extends JFrame {
 		JLabel groupSizeLabel = new JLabel("Group size:");
 		JLabel courseNameLabel = new JLabel("Course name:");
 		
-		JTextField groupSizeField = new JTextField(20);
-		JTextField courseNameField = new JTextField(20);
+		final JTextField groupSizeField = new JTextField(20);
+		final JTextField courseNameField = new JTextField(20);
 		
 		JButton confirm = new JButton("Confirm");
 		confirm.addActionListener(new ActionListener() {

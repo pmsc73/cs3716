@@ -9,7 +9,7 @@ import utility.Group;
 import utility.Student;
 
 /****
- * Class to represent a set of project groups
+ * Class to represent a set of project groups. Holds data pertaining to the specified class of students and the project.
  * @author Emily
  *
  ****/
@@ -70,7 +70,7 @@ public class GroupManager {
 		return groupSizes;
 	}
 	/****
-	 * Remove a student from a group
+	 * Remove a student from a group. Returns false if the student wasn't in the group to begin with.s
 	 ***/
 	public boolean removeStudent(Student s, Group g){
 		boolean b=g.remove(s);
@@ -78,7 +78,7 @@ public class GroupManager {
 		return b;
 	}
 	/****
-	 * Add a student to a group. This method will add a student to a full group, so  be careful
+	 * Add a student to a group. This method will add a student to a full group, so be careful with it.
 	 ****/
 	public void addStudent(Student s, Group g){
 		g.add(s);
@@ -102,16 +102,16 @@ public class GroupManager {
 		questionnaire= new QuestionnaireManager(); // fixed
 	}
 
-	/**
+	/****
 	 * @return The collection of groups for the project group
-	 */
+	 ****/
 	public Collection<Group> getGroups() {
 		return groups;
 	}
 
-	/**
-	 * @return
-	 */
+	/****
+	 * @return All of the students which don't currently belong to a group.
+	 ****/
 	public Collection<Student> getUnaddedStudents() {
 		return unassignedStudents;
 	}
