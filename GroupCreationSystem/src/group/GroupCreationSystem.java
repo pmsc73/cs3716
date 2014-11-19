@@ -5,11 +5,11 @@ import java.util.Collection;
 import utility.Group;
 import utility.Registrar;
 import utility.Student;
-/***
+/****
  * Class to represent our group creation system
  * @author Emily
  *
- */
+ ****/
 public class GroupCreationSystem {
 	
 	private String courseNumber;
@@ -22,7 +22,6 @@ public class GroupCreationSystem {
 	private Collection<Student> allStudents;
 	
 	public GroupCreationSystem(){
-		//creator=new ProjectGroups();
 		initialized=false;
 	}
 	/****
@@ -34,9 +33,9 @@ public class GroupCreationSystem {
 	 * @param instructor String to represent the instructor
 	 * @return
 	 ****/
-	public Collection<Group> createGroups(String courseNum, int groupSize, boolean skillBased, double deadline, String instructor){
-		initialize(courseNum, groupSize, skillBased, deadline,instructor);
-		allStudents=Registrar.getStudents(courseNum);
+	public Collection<Group> startEmptyGroups(){
+		initialize();
+		allStudents=Registrar.getStudents(courseNumber);
 		for(Student s: allStudents){
 			Registrar.getSchoolSchedule(s);
 		}
@@ -45,16 +44,11 @@ public class GroupCreationSystem {
 		if(skillBased){
 			creator.setSkillBased();
 		}
-		return null;
+		return creator.getGroups();
 	}
 	
-	private void initialize(String courseNum, int groupSize, boolean skillBased, double deadline, String instructor){
-		this.setCourseNumber(courseNum);
-		this.setGroupSize(groupSize);
-		this.skillBased=skillBased;
-		this.setDeadline(deadline);
-		this.setInstructor(instructor);
-		//lst=Registrar.getStudents(courseNumber); This would be where the system retrieves student information from the registrar
+	private void initialize(){
+		
 		initialized=true;
 		/******
 		 * Code for notifying students of deadline goes here
