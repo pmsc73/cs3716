@@ -4,13 +4,18 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.EventQueue;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import group.Controller;
 
 /**
  * @author Matt
@@ -19,12 +24,14 @@ import javax.swing.JTextField;
 public class GroupSizeGUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField tfGroupSize;
+	private String courseName;
+	private int groupSize;
+	private Controller controller;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -40,22 +47,51 @@ public class GroupSizeGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GroupSizeGUI() {
+	public GroupSizeGUI(Controller controller) {
+		this.controller = controller;
 		setTitle("Enter Group Size");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 277, 113);
+		setSize(260,175);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
-		JLabel lblGroupSize = new JLabel("Size of each group:");
-		lblGroupSize.setBounds(83, 0, 93, 36);
-		contentPane.add(lblGroupSize);
+		JLabel groupSizeLabel = new JLabel("Group size:");
+		JLabel courseNameLabel = new JLabel("Course name:");
 		
-		tfGroupSize = new JTextField();
-		tfGroupSize.setBounds(83, 44, 93, 20);
-		contentPane.add(tfGroupSize);
-		tfGroupSize.setColumns(10);
+		JTextField groupSizeField = new JTextField(20);
+		JTextField courseNameField = new JTextField(20);
+		
+		JButton confirm = new JButton("Confirm");
+		confirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// button pressed
+				try {
+					groupSize = Integer.parseInt(groupSizeField.getText());
+				}
+				catch(NumberFormatException NaN) {
+					groupSizeField.setText("Try again");
+					return;
+				}
+				courseName = courseNameField.getText();
+				if(courseName.equals("")) {
+					return;
+				}
+				
+				GroupProjectGUI projGui = new GroupProjectGUI();
+				controller.setCourseName(courseName);
+				controller.setGroupSize()
+				projGui.setVisible(true);
+				setVisible(false);
+			}
+		});
+		
+		contentPane.add(courseNameLabel);
+		contentPane.add(courseNameField);
+		contentPane.add(groupSizeLabel);
+		contentPane.add(groupSizeField);
+		contentPane.add(confirm);
+		
 	}
 }
