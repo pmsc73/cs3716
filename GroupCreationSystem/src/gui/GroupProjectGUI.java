@@ -1,4 +1,11 @@
+/**
+ * @Author-Noah and Matthew
+ */
+
 package gui;
+import group.*;
+import java.util.Collection;
+import utility.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -22,14 +29,14 @@ public class GroupProjectGUI extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void start(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GroupProjectGUI frame = new GroupProjectGUI();
+					GroupProjectGUI frame = new GroupProjectGUI(controller);
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("Error creating swing window.");
 				}
 			}
 		});
@@ -38,7 +45,7 @@ public class GroupProjectGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GroupProjectGUI() {
+	public GroupProjectGUI(Controller controller) {
 		setTitle("Group Creation System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 340);
@@ -52,10 +59,10 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(pnlGroups);
 		pnlGroups.setLayout(null);
 		
-		JList lstGroups = new JList();
-		lstGroups.setBounds(0, 0, 109, 230);
-		lstGroups.setBorder(null);
-		lstGroups.setModel(new AbstractListModel() {
+		JList groupList = new JList();
+		groupList.setBounds(0, 0, 109, 230);
+		groupList.setBorder(null);
+		groupList.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Group 1", "Group 2", "Group 3", "Group 4", "Group 5", "Group 6"};
 			public int getSize() {
 				return values.length;
@@ -67,7 +74,7 @@ public class GroupProjectGUI extends JFrame {
 		
 		JScrollPane scrlGroups = new JScrollPane();
 		scrlGroups.setViewportBorder(null);
-		scrlGroups.setViewportView(lstGroups);
+		scrlGroups.setViewportView(groupList);
 		scrlGroups.setBounds(0, 0, 109, 263);
 		pnlGroups.add(scrlGroups);
 		
