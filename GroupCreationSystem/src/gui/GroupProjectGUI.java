@@ -72,21 +72,26 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(groupsPanel);
 		groupsPanel.setLayout(null);
 		
-		
-		int numOfGroups = controller.getGroupSize();
 		DefaultListModel groupModel=new DefaultListModel();
-		for (int i=0; i<numOfGroups; i++){
+		
+		Collection<Group> groups=controller.getGroups();
+		/*
+		for (Group group:groups){
+			groupModel.addElement(group.getName());
+		}
+		*/
+		for (int i=0; i<controller.getGroupSize(); i++){
 			groupModel.addElement("Group"+i);
 		}
 		JList groupList = new JList(groupModel);
 		groupList.setBounds(0, 0, 109, 230);
 		groupList.setBorder(null);
 		
-		Collection<Group> groups = controller.getGroups();
-		
 		groupList.addListSelectionListener(new ListSelectionListener(){
 			
 			public void valueChanged(ListSelectionEvent arg){
+				System.out.print("help");
+				
 			}
 		});
 		
@@ -164,5 +169,19 @@ public class GroupProjectGUI extends JFrame {
 		lblUnassigned.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblUnassigned.setBounds(172, 175, 153, 14);
 		contentPane.add(lblUnassigned);
+	}
+}
+
+//listener for changing the group list
+class groupChangeListener implements ListSelectionListener{
+	private Controller controller;//holds the controller to get groups
+	public groupChangeListener(Controller controller){
+		this.controller=controller;
+	}
+	public void valueChanged(ListSelectionEvent e){
+		Collection<Group> groups=controller.getGroups();
+		for (Group group:groups){
+			
+		}
 	}
 }
