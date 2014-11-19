@@ -1,4 +1,11 @@
+/**
+ * @Author-Noah, Matthew
+ */
+
 package gui;
+import group.*;
+import java.util.Collection;
+import utility.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -16,20 +23,22 @@ import java.awt.Font;
 
 
 public class GroupProjectGUI extends JFrame {
-
+	private Controller controller;
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
+	 * Launch the GUI page.
 	 */
-	public static void main(String[] args) {
+	public void start(){
+		//controller=this.controller; //intializes variables 
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GroupProjectGUI frame = new GroupProjectGUI();
+					GroupProjectGUI frame = new GroupProjectGUI(controller);
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("Error creating swing window.");
 				}
 			}
 		});
@@ -38,24 +47,34 @@ public class GroupProjectGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GroupProjectGUI() {
+	public GroupProjectGUI(Controller controller) {
+		/*
+		 * Logic
+		 */
+		int numOfGroups = controller.getGroupSize();
+		String[] groupNames= new String[numOfGroups];
+		for (int i=0; i<numOfGroups; i++){
+			groupNames[i]="Group "+i;
+		}
+		
 		setTitle("Group Creation System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 450, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel pnlGroups = new JPanel();
-		pnlGroups.setBounds(10, 30, 109, 263);
-		contentPane.add(pnlGroups);
-		pnlGroups.setLayout(null);
+		JPanel groupsPanel = new JPanel();
+		groupsPanel.setBounds(10, 30, 109, 263);
+		contentPane.add(groupsPanel);
+		groupsPanel.setLayout(null);
 		
-		JList lstGroups = new JList();
-		lstGroups.setBounds(0, 0, 109, 230);
-		lstGroups.setBorder(null);
-		lstGroups.setModel(new AbstractListModel() {
+		JList groupList = new JList();
+		groupList.setBounds(0, 0, 109, 230);
+		groupList.setBorder(null);
+		groupList.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Group 1", "Group 2", "Group 3", "Group 4", "Group 5", "Group 6"};
 			public int getSize() {
 				return values.length;
@@ -67,14 +86,14 @@ public class GroupProjectGUI extends JFrame {
 		
 		JScrollPane scrlGroups = new JScrollPane();
 		scrlGroups.setViewportBorder(null);
-		scrlGroups.setViewportView(lstGroups);
+		scrlGroups.setViewportView(groupList);
 		scrlGroups.setBounds(0, 0, 109, 263);
-		pnlGroups.add(scrlGroups);
+		groupsPanel.add(scrlGroups);
 		
-		JPanel pnlMembers = new JPanel();
-		pnlMembers.setBounds(172, 30, 252, 120);
-		contentPane.add(pnlMembers);
-		pnlMembers.setLayout(null);
+		JPanel groupMembersPanel = new JPanel();
+		groupMembersPanel.setBounds(172, 30, 252, 120);
+		contentPane.add(groupMembersPanel);
+		groupMembersPanel.setLayout(null);
 		
 		JList lstMembers = new JList();
 		lstMembers.setModel(new AbstractListModel() {
@@ -91,15 +110,15 @@ public class GroupProjectGUI extends JFrame {
 		JScrollPane scrlMembers = new JScrollPane();
 		scrlMembers.setBounds(0, 0, 252, 120);
 		scrlMembers.setColumnHeaderView(lstMembers);
-		pnlMembers.add(scrlMembers);
+		groupMembersPanel.add(scrlMembers);
 		
 		JPanel pnlUnassigned = new JPanel();
 		pnlUnassigned.setBounds(173, 198, 251, 93);
 		contentPane.add(pnlUnassigned);
 		pnlUnassigned.setLayout(null);
 		
-		JList lstUnassigned = new JList();
-		lstUnassigned.setModel(new AbstractListModel() {
+		JList unassignedStudentList = new JList();
+		unassignedStudentList.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Null", "John", "Stephen", "Member XYZ"};
 			public int getSize() {
 				return values.length;
@@ -108,10 +127,10 @@ public class GroupProjectGUI extends JFrame {
 				return values[index];
 			}
 		});
-		lstUnassigned.setBounds(0, 0, 251, 93);
+		unassignedStudentList.setBounds(0, 0, 251, 93);
 		
 		JScrollPane scrlUnassigned = new JScrollPane();
-		scrlUnassigned.setViewportView(lstUnassigned);
+		scrlUnassigned.setViewportView(unassignedStudentList);
 		scrlUnassigned.setBounds(0, 0, 251, 93);
 		pnlUnassigned.add(scrlUnassigned);
 		
