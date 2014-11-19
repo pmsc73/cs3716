@@ -22,7 +22,6 @@ public class GroupCreationSystem {
 	private Collection<Student> allStudents;
 	
 	public GroupCreationSystem(){
-		//creator=new ProjectGroups();
 		initialized=false;
 	}
 	/****

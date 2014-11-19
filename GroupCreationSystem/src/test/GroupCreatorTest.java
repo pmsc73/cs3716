@@ -21,7 +21,7 @@ public class GroupCreatorTest {
 		testMemberDivision(26,5);
 		testMemberDivision(6,2);
 		testMemberDivision(40, 3);
-		importTest("cs3716.dat");
+		//importTest("cs3716.dat");
 		systemTest();
 	}
 	/****
@@ -46,7 +46,7 @@ public class GroupCreatorTest {
 	 ****/
 	public static void systemTest() {
 		GroupCreationSystem sys = new GroupCreationSystem();
-		sys.createGroups("3716", 2, false, 234029345, "testname");
+		sys.createGroups("cs3716", 2, false, 234029345, "testname");
 		sys.addStudentsToGroups();
 		Collection<Group> groups = sys.getGroups();
 		for(Group g: groups){
