@@ -17,7 +17,7 @@ public class GroupCreationSystem {
 	private boolean skillBased;
 	private double deadline;
 	private String instructor;
-	private ProjectGroups creator;
+	private GroupManager creator;
 	boolean initialized;
 	private Collection<Student> allStudents;
 	
@@ -25,12 +25,7 @@ public class GroupCreationSystem {
 		initialized=false;
 	}
 	/****
-	 *  This method is used to initialize a set of empty groups. 
-	 * @param courseNum String representing the course number
-	 * @param groupSize Maximum number of students per group
-	 * @param skillBased Whether or not the groups will be based on skill
-	 * @param deadline Deadline for entry of student information
-	 * @param instructor String to represent the instructor
+	 * Method makes empty groups
 	 * @return
 	 ****/
 	public Collection<Group> startEmptyGroups(){
@@ -39,7 +34,7 @@ public class GroupCreationSystem {
 		for(Student s: allStudents){
 			Registrar.getSchoolSchedule(s);
 		}
-		creator= new ProjectGroups(allStudents);
+		creator= new GroupManager(allStudents);
 		creator.createEmptyGroups(allStudents.size(), groupSize);
 		if(skillBased){
 			creator.setSkillBased();
@@ -47,6 +42,9 @@ public class GroupCreationSystem {
 		return creator.getGroups();
 	}
 	
+	public GroupManager getGroupManager(){
+		return creator;
+	}
 	private void initialize(){
 		
 		initialized=true;
@@ -116,5 +114,11 @@ public class GroupCreationSystem {
 	 */
 	public void setDeadline(double deadline) {
 		this.deadline = deadline;
+	}
+	/**
+	 * @return All of the students
+	 */
+	public Collection<Student> getStudents(){
+		return allStudents;
 	}
 }
