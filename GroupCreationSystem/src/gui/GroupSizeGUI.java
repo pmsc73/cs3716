@@ -70,6 +70,7 @@ public class GroupSizeGUI extends JFrame {
 				}
 				controller.setCourseNumber(courseName);
 				controller.setGroupSize(groupSize);
+				controller.finalizeParameters();
 				done = true;
 			}
 		});

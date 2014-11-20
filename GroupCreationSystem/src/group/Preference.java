@@ -13,6 +13,7 @@ import utility.Student;
  * positive weight --> must work together
  * negative weight --> cannot work together
  *
+ * @author pmsc73
  */
 public class Preference {
 	private int level; //indicates positive or negative preference, or 0 for no

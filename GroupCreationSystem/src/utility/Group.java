@@ -15,10 +15,12 @@ public class Group{
 	private int numStudents;
 	private Collection<Student> members;
 	private String groupName;
+	private static int id=0;
 	
 	public Group(int max){
 		MAXSTUDENTS=max;
 		members=new ArrayList<Student>();
+		groupName = "Group "+id++;
 	}
 
 	/****

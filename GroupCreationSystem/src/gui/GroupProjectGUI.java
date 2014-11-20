@@ -1,11 +1,12 @@
 /**
- * @Author-Noah
+ * @Author-Noah,Philip
  */
 
 package gui;
 import group.*;
 
 import java.util.Collection;
+import java.util.ArrayList;
 
 import utility.*;
 
@@ -19,6 +20,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.ListModel;
 import javax.swing.AbstractListModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -72,30 +74,22 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(groupsPanel);
 		groupsPanel.setLayout(null);
 		
-		DefaultListModel groupModel=new DefaultListModel();
+		controller.generateGroups(); // makes the groups in the controller
+		DefaultListModel<String> groupModel=new DefaultListModel<String>(); 
+		// groupModel is a list of the group names, effectively
 		
 		Collection<Group> groups=controller.getGroups();
-		/*
+		// list of all groups from controller
+		
 		for (Group group:groups){
 			groupModel.addElement(group.getName());
+			//the model gets each group name added
 		}
-		*/
-		for (int i=0; i<controller.getGroupSize(); i++){
-			groupModel.addElement("Group"+i);
-		}
-		JList groupList = new JList(groupModel);
+		
+		JList<String> groupList = new JList<String>(groupModel);
+		// groupList is a list who implements the model
 		groupList.setBounds(0, 0, 109, 230);
 		groupList.setBorder(null);
-		
-		groupList.addListSelectionListener(new ListSelectionListener(){
-			
-			public void valueChanged(ListSelectionEvent arg){
-				System.out.print("help");
-				
-			}
-		});
-		
-		
 		
 		JScrollPane scrlGroups = new JScrollPane();
 		scrlGroups.setViewportBorder(null);
@@ -108,16 +102,11 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(groupMembersPanel);
 		groupMembersPanel.setLayout(null);
 		
-		JList lstMembers = new JList();
-		lstMembers.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Member 1", "Member 2", "Member 3", "Bob Smith Worthenshire III"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		DefaultListModel<String> lmModel = new DefaultListModel<String>();
+		// lmModel is like groupModel but for the GROUP MEMBER LIST
+		JList<String> lstMembers = new JList<String>(lmModel);
+		// lstMembers is the JList who gets to hold lmModel
+		
 		lstMembers.setBounds(0, 0, 252, 120);
 		
 		JScrollPane scrlMembers = new JScrollPane();
@@ -131,15 +120,7 @@ public class GroupProjectGUI extends JFrame {
 		pnlUnassigned.setLayout(null);
 		
 		JList unassignedStudentList = new JList();
-		unassignedStudentList.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Null", "John", "Stephen", "Member XYZ"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		
 		unassignedStudentList.setBounds(0, 0, 251, 93);
 		
 		JScrollPane scrlUnassigned = new JScrollPane();
@@ -147,9 +128,47 @@ public class GroupProjectGUI extends JFrame {
 		scrlUnassigned.setBounds(0, 0, 251, 93);
 		pnlUnassigned.add(scrlUnassigned);
 		
-		JButton btnMove = new JButton("MOVE");
+		/*
+		 * This is by no means the best way, or the final way that this task will be done
+		 * I ran into some trouble trying to use the ActionEvent that should be fired
+		 * any time a list selection is changed. The following is TEMPORARY
+		 * 
+		 * Philip
+		 */
+		
+		// TEMOPRARILY CHANGED MOVE BUTTON TO SAY REFRESH //
+		JButton btnMove = new JButton("REFRESH");
 		btnMove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				/*
+				 * This ActionListener should make the Group Member list have
+				 * the appropriate things in it. There must be an error somewhere, 
+				 * however, as it does not seem to do what I described
+				 */
+				for(Group group:groups) {
+					group.printGroup(); // for debugging
+				}
+				int i = 0;
+				lmModel.clear(); //make sure lmModel is empty to begin
+				for(i=0;i<groups.size();i++){
+					//debugging print
+					System.out.println( ((ArrayList<Group>)groups).get(i).getName() + " : " + groupList.getSelectedValue());
+					
+					// tl;dr for this if: current selected group name == group(i) 
+					if ((((ArrayList<Group>)groups).get(i).getName()).equals(groupList.getSelectedValue())) {
+						System.out.println("success"); //prints our success
+						break;
+					}
+				}
+				ArrayList<Student> students = new ArrayList<Student>();
+				if (i<groups.size()) {
+					students = (ArrayList<Student>) ((ArrayList<Group>)groups).get(i).getGroupMembers();
+				}
+				for(Student student : students){ 
+					System.out.println(student.getName());
+					lmModel.addElement(student.getName());
+				}
+				
 			}
 		});
 		btnMove.setBounds(335, 156, 89, 23);
