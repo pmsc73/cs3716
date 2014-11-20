@@ -102,31 +102,31 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(groupMembersPanel);
 		groupMembersPanel.setLayout(null);
 		
-		DefaultListModel<String> lmModel = new DefaultListModel<String>();
-		// lmModel is like groupModel but for the GROUP MEMBER LIST
-		JList<String> lstMembers = new JList<String>(lmModel);
-		// lstMembers is the JList who gets to hold lmModel
+		DefaultListModel<String> memberModel = new DefaultListModel<String>();
+		// memberModel is like groupModel but for the GROUP MEMBER LIST
+		JList<String> groupMembersList = new JList<String>(memberModel);
+		// groupMembersList is the JList who gets to hold memberModel
 		
-		lstMembers.setBounds(0, 0, 252, 120);
+		groupMembersList.setBounds(0, 0, 252, 120);
 		
-		JScrollPane scrlMembers = new JScrollPane();
-		scrlMembers.setBounds(0, 0, 252, 120);
-		scrlMembers.setColumnHeaderView(lstMembers);
-		groupMembersPanel.add(scrlMembers);
+		JScrollPane groupMembersScroll = new JScrollPane();
+		groupMembersScroll.setBounds(0, 0, 252, 120);
+		groupMembersScroll.setColumnHeaderView(groupMembersList);
+		groupMembersPanel.add(groupMembersScroll);
 		
-		JPanel pnlUnassigned = new JPanel();
-		pnlUnassigned.setBounds(173, 198, 251, 93);
-		contentPane.add(pnlUnassigned);
-		pnlUnassigned.setLayout(null);
+		JPanel unassignedPanel = new JPanel();
+		unassignedPanel.setBounds(173, 198, 251, 93);
+		contentPane.add(unassignedPanel);
+		unassignedPanel.setLayout(null);
 		
 		JList unassignedStudentList = new JList();
 		
 		unassignedStudentList.setBounds(0, 0, 251, 93);
 		
-		JScrollPane scrlUnassigned = new JScrollPane();
-		scrlUnassigned.setViewportView(unassignedStudentList);
-		scrlUnassigned.setBounds(0, 0, 251, 93);
-		pnlUnassigned.add(scrlUnassigned);
+		JScrollPane unassignedScroll = new JScrollPane();
+		unassignedScroll.setViewportView(unassignedStudentList);
+		unassignedScroll.setBounds(0, 0, 251, 93);
+		unassignedPanel.add(unassignedScroll);
 		
 		/*
 		 * This is by no means the best way, or the final way that this task will be done
@@ -138,8 +138,8 @@ public class GroupProjectGUI extends JFrame {
 		
 		
 		// TEMOPRARILY CHANGED MOVE BUTTON TO SAY REFRESH //
-		JButton btnMove = new JButton("REFRESH");
-		btnMove.addActionListener(new ActionListener() {
+		JButton moveButton = new JButton("REFRESH");
+		moveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				/*
 				 * This ActionListener should make the Group Member list have
@@ -150,7 +150,7 @@ public class GroupProjectGUI extends JFrame {
 					group.printGroup(); // for debugging
 				}
 				int i = 0;
-				lmModel.clear(); //make sure lmModel is empty to begin
+				memberModel.clear(); //make sure memberModel is empty to begin
 				for(i=0;i<groups.size();i++){
 					//debugging print
 					System.out.println( ((ArrayList<Group>)groups).get(i).getName() + " : " + groupList.getSelectedValue());
@@ -167,28 +167,28 @@ public class GroupProjectGUI extends JFrame {
 				}
 				for(Student student : students){ 
 					System.out.println(student.getName());
-					lmModel.addElement(student.getName());
+					memberModel.addElement(student.getName());
 				}
 				
 			}
 		});
-		btnMove.setBounds(335, 156, 89, 23);
-		contentPane.add(btnMove);
+		moveButton.setBounds(335, 156, 89, 23);
+		contentPane.add(moveButton);
 		
-		JLabel lblGroups = new JLabel("Group List:");
-		lblGroups.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblGroups.setBounds(10, 5, 109, 14);
-		contentPane.add(lblGroups);
+		JLabel groupsLabel = new JLabel("Group List:");
+		groupsLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		groupsLabel.setBounds(10, 5, 109, 14);
+		contentPane.add(groupsLabel);
 		
-		JLabel lblMembers = new JLabel("Group Members:");
-		lblMembers.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMembers.setBounds(172, 5, 117, 14);
-		contentPane.add(lblMembers);
+		JLabel membersLabel = new JLabel("Group Members:");
+		membersLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		membersLabel.setBounds(172, 5, 117, 14);
+		contentPane.add(membersLabel);
 		
-		JLabel lblUnassigned = new JLabel("Unassigned Members:");
-		lblUnassigned.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblUnassigned.setBounds(172, 175, 153, 14);
-		contentPane.add(lblUnassigned);
+		JLabel unassignedLabel = new JLabel("Unassigned Members:");
+		unassignedLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		unassignedLabel.setBounds(172, 175, 153, 14);
+		contentPane.add(unassignedLabel);
 	}
 }
 
