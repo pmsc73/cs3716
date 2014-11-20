@@ -103,48 +103,11 @@ public class GroupProjectGUI extends JFrame {
 		groupMembersPanel.setLayout(null);
 		
 		DefaultListModel<String> lmModel = new DefaultListModel<String>();
+
 		// lmModel is like groupModel but for the GROUP MEMBER LIST
 		JList<String> lstMembers = new JList<String>(lmModel);
-		// lstMembers is the JList who gets to hold lmModel
-		
-		lstMembers.setBounds(0, 0, 252, 120);
-		
-		JScrollPane scrlMembers = new JScrollPane();
-		scrlMembers.setBounds(0, 0, 252, 120);
-		scrlMembers.setColumnHeaderView(lstMembers);
-		groupMembersPanel.add(scrlMembers);
-		
-		JPanel pnlUnassigned = new JPanel();
-		pnlUnassigned.setBounds(173, 198, 251, 93);
-		contentPane.add(pnlUnassigned);
-		pnlUnassigned.setLayout(null);
-		
-		JList unassignedStudentList = new JList();
-		
-		unassignedStudentList.setBounds(0, 0, 251, 93);
-		
-		JScrollPane scrlUnassigned = new JScrollPane();
-		scrlUnassigned.setViewportView(unassignedStudentList);
-		scrlUnassigned.setBounds(0, 0, 251, 93);
-		pnlUnassigned.add(scrlUnassigned);
-		
-		/*
-		 * This is by no means the best way, or the final way that this task will be done
-		 * I ran into some trouble trying to use the ActionEvent that should be fired
-		 * any time a list selection is changed. The following is TEMPORARY
-		 * 
-		 * Philip
-		 */
-		
-		// TEMOPRARILY CHANGED MOVE BUTTON TO SAY REFRESH //
-		JButton btnMove = new JButton("REFRESH");
-		btnMove.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				/*
-				 * This ActionListener should make the Group Member list have
-				 * the appropriate things in it. There must be an error somewhere, 
-				 * however, as it does not seem to do what I described
-				 */
+		groupList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
 				for(Group group:groups) {
 					group.printGroup(); // for debugging
 				}
@@ -168,9 +131,33 @@ public class GroupProjectGUI extends JFrame {
 					System.out.println(student.getName());
 					lmModel.addElement(student.getName());
 				}
-				
 			}
 		});
+		// lstMembers is the JList who gets to hold lmModel
+		
+		lstMembers.setBounds(0, 0, 252, 120);
+		
+		JScrollPane scrlMembers = new JScrollPane();
+		scrlMembers.setBounds(0, 0, 252, 120);
+		scrlMembers.setColumnHeaderView(lstMembers);
+		groupMembersPanel.add(scrlMembers);
+		
+		JPanel pnlUnassigned = new JPanel();
+		pnlUnassigned.setBounds(173, 198, 251, 93);
+		contentPane.add(pnlUnassigned);
+		pnlUnassigned.setLayout(null);
+		
+		JList unassignedStudentList = new JList();
+		
+		unassignedStudentList.setBounds(0, 0, 251, 93);
+		
+		JScrollPane scrlUnassigned = new JScrollPane();
+		scrlUnassigned.setViewportView(unassignedStudentList);
+		scrlUnassigned.setBounds(0, 0, 251, 93);
+		pnlUnassigned.add(scrlUnassigned);
+		
+		JButton btnMove = new JButton("MOVE");
+		
 		btnMove.setBounds(335, 156, 89, 23);
 		contentPane.add(btnMove);
 		
