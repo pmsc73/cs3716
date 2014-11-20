@@ -78,7 +78,7 @@ public class GroupProjectGUI extends JFrame {
 		DefaultListModel<String> groupModel=new DefaultListModel<String>(); 
 		// groupModel is a list of the group names, effectively
 		
-		Collection<Group> groups=controller.getGroups();
+		final Collection<Group> groups=controller.getGroups();
 		// list of all groups from controller
 		
 		for (Group group:groups){
@@ -86,7 +86,7 @@ public class GroupProjectGUI extends JFrame {
 			//the model gets each group name added
 		}
 		
-		JList<String> groupList = new JList<String>(groupModel);
+		final JList<String> groupList = new JList<String>(groupModel);
 		// groupList is a list who implements the model
 		groupList.setBounds(0, 0, 109, 230);
 		groupList.setBorder(null);
@@ -102,7 +102,7 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(groupMembersPanel);
 		groupMembersPanel.setLayout(null);
 		
-		DefaultListModel<String> lmModel = new DefaultListModel<String>();
+		final DefaultListModel<String> lmModel = new DefaultListModel<String>();
 		// lmModel is like groupModel but for the GROUP MEMBER LIST
 		JList<String> lstMembers = new JList<String>(lmModel);
 		// lstMembers is the JList who gets to hold lmModel
@@ -141,52 +141,39 @@ public class GroupProjectGUI extends JFrame {
 		scrlMembers.setColumnHeaderView(lstMembers);
 		groupMembersPanel.add(scrlMembers);
 		
-		JPanel pnlUnassigned = new JPanel();
-		pnlUnassigned.setBounds(173, 198, 251, 93);
-		contentPane.add(pnlUnassigned);
-		pnlUnassigned.setLayout(null);
+		JPanel unassignedPanel = new JPanel();
+		unassignedPanel.setBounds(173, 198, 251, 93);
+		contentPane.add(unassignedPanel);
+		unassignedPanel.setLayout(null);
 		
 		JList unassignedStudentList = new JList();
 		
 		unassignedStudentList.setBounds(0, 0, 251, 93);
 		
-		JScrollPane scrlUnassigned = new JScrollPane();
-		scrlUnassigned.setViewportView(unassignedStudentList);
-		scrlUnassigned.setBounds(0, 0, 251, 93);
-		pnlUnassigned.add(scrlUnassigned);
+		JScrollPane unassignedScroll = new JScrollPane();
+		unassignedScroll.setViewportView(unassignedStudentList);
+		unassignedScroll.setBounds(0, 0, 251, 93);
+		unassignedPanel.add(unassignedScroll);
 		
-		JButton btnMove = new JButton("MOVE");
+		JButton moveButton = new JButton("MOVE");
 		
-		btnMove.setBounds(335, 156, 89, 23);
-		contentPane.add(btnMove);
+		moveButton.setBounds(335, 156, 89, 23);
+		contentPane.add(moveButton);
 		
-		JLabel lblGroups = new JLabel("Group List:");
-		lblGroups.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblGroups.setBounds(10, 5, 109, 14);
-		contentPane.add(lblGroups);
+		JLabel groupsLabel = new JLabel("Group List:");
+		groupsLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		groupsLabel.setBounds(10, 5, 109, 14);
+		contentPane.add(groupsLabel);
 		
-		JLabel lblMembers = new JLabel("Group Members:");
-		lblMembers.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMembers.setBounds(172, 5, 117, 14);
-		contentPane.add(lblMembers);
+		JLabel membersLabel = new JLabel("Group Members:");
+		membersLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		membersLabel.setBounds(172, 5, 117, 14);
+		contentPane.add(membersLabel);
 		
-		JLabel lblUnassigned = new JLabel("Unassigned Members:");
-		lblUnassigned.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblUnassigned.setBounds(172, 175, 153, 14);
-		contentPane.add(lblUnassigned);
+		JLabel unassignedLabel = new JLabel("Unassigned Members:");
+		unassignedLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		unassignedLabel.setBounds(172, 175, 153, 14);
+		contentPane.add(unassignedLabel);
 	}
 }
 
-//listener for changing the group list
-class groupChangeListener implements ListSelectionListener{
-	private Controller controller;//holds the controller to get groups
-	public groupChangeListener(Controller controller){
-		this.controller=controller;
-	}
-	public void valueChanged(ListSelectionEvent e){
-		Collection<Group> groups=controller.getGroups();
-		for (Group group:groups){
-			
-		}
-	}
-}
