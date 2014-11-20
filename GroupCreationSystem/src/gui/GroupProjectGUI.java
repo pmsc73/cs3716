@@ -164,30 +164,43 @@ public class GroupProjectGUI extends JFrame {
 		//listener for move button, onclick it opens a popup window
 		//for the group to move the selected student into.
 		//remember to allow moving student to unassigned.
+		final JList<String> popupGroupList = new JList<String>(groupModel);
 		moveButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String selectedGroup = groupList.getSelectedValue();
 				String selectedStudent= lstMembers.getSelectedValue();
-				
-				JDialog popup = new JDialog();
-				popup.setLayout(new FlowLayout());
-				popup.setSize(400,400);
-				
-				JPanel popupGroups = new JPanel();
-				JLabel overhead = new JLabel("Move "+selectedStudent+" Where?");
-				overhead.setBounds(0, 0, 109, 14);
-				popup.add(overhead);
-				popup.setSize(400,400);
-				
-				JScrollPane groupsScroll = new JScrollPane();
-				groupsScroll.setViewportView(groupList);
-				popupGroups.setBounds(0,50,200,300);
-				popupGroups.add(groupsScroll);
-				popup.add(popupGroups);
-				JButton moveIt =new JButton("MOVE");
-				moveIt.setBounds(100,100,120,120);
-				//popup.add(moveIt);
-				popup.setVisible(true);
+				if(selectedStudent == null){
+				}
+				else{
+					
+					JDialog popup = new JDialog();
+					popup.setLayout(new FlowLayout());
+					popup.setSize(400,400);
+					
+					final JPanel popupGroups = new JPanel();
+					JLabel overhead = new JLabel("Move "+selectedStudent+" Where?");
+					overhead.setBounds(0, 0, 109, 14);
+					popup.add(overhead);
+					popup.setSize(300,300);
+					
+					JScrollPane groupsScroll = new JScrollPane();
+					groupsScroll.setViewportView(popupGroupList);
+					popupGroups.setBounds(0,20,200,300);
+					popupGroups.add(groupsScroll);
+					popup.add(popupGroups);
+					JButton moveIt =new JButton("MOVE");
+					
+					moveIt.addActionListener(new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+							String moveTo = popupGroupList.getSelectedValue(); 
+							System.out.println(moveTo);
+						}
+					});
+					
+					moveIt.setBounds(100,100,120,120);
+					popup.add(moveIt);
+					popup.setVisible(true);
+				}
 			}
 		});
 		
