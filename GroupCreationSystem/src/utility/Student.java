@@ -63,7 +63,7 @@ public class Student {
 		return s;
 	}
 	public boolean equals(Object o){
-		return(this.name.equals(((Student)o).name)&&this.id.equals(((Student)o).id));
+		return this.name.equals(((Student)o).name);
 	}
 }
 

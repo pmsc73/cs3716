@@ -110,4 +110,31 @@ public class Controller {
 		return null;
 		
 	}
+	/****
+	 * @param Given a students name, returns the Student object which represents that student.
+	 *  Returns null if the student does not exist
+	 * 
+	 ****/
+	public Student getStudentByName(String name){
+		Student s = new Student(name, null);
+		Collection<Student> students = sys.getStudents();
+		for(Student x: students){
+			if(s.equals(x)) return x;
+		}
+		return null;
+	}
+	/****
+	 * @param Given a group name, returns the Group object which represents that group.
+	 *  Returns null if the student does not exist
+	 * 
+	 ****/
+	public Group getGroupByName(String name){
+		Group g = new Group(0);
+		Collection<Group> groups = sys.getGroups();
+		for(Group x: groups){
+			if (x.equals(g)) return x;
+		}
+		return null;
+		
+	}
 }
