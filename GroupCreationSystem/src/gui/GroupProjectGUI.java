@@ -91,11 +91,11 @@ public class GroupProjectGUI extends JFrame {
 		groupList.setBounds(0, 0, 109, 230);
 		groupList.setBorder(null);
 		
-		JScrollPane scrlGroups = new JScrollPane();
-		scrlGroups.setViewportBorder(null);
-		scrlGroups.setViewportView(groupList);
-		scrlGroups.setBounds(0, 0, 109, 263);
-		groupsPanel.add(scrlGroups);
+		JScrollPane groupsScroll = new JScrollPane();
+		groupsScroll.setViewportBorder(null);
+		groupsScroll.setViewportView(groupList);
+		groupsScroll.setBounds(0, 0, 109, 263);
+		groupsPanel.add(groupsScroll);
 		
 		JPanel groupMembersPanel = new JPanel();
 		groupMembersPanel.setBounds(172, 30, 252, 120);
