@@ -12,6 +12,7 @@ import utility.*;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.ListModel;
 import javax.swing.AbstractListModel;
@@ -104,8 +106,9 @@ public class GroupProjectGUI extends JFrame {
 		
 		final DefaultListModel<String> lmModel = new DefaultListModel<String>();
 		// lmModel is like groupModel but for the GROUP MEMBER LIST
-		JList<String> lstMembers = new JList<String>(lmModel);
+		final JList<String> lstMembers = new JList<String>(lmModel);
 		// lstMembers is the JList who gets to hold lmModel
+
 		groupList.addListSelectionListener( new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				for(Group group:groups) {
@@ -158,6 +161,36 @@ public class GroupProjectGUI extends JFrame {
 		JButton moveButton = new JButton("MOVE");
 		
 		moveButton.setBounds(335, 156, 89, 23);
+		//listener for move button, onclick it opens a popup window
+		//for the group to move the selected student into.
+		//remember to allow moving student to unassigned.
+		moveButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String selectedGroup = groupList.getSelectedValue();
+				String selectedStudent= lstMembers.getSelectedValue();
+				
+				JDialog popup = new JDialog();
+				popup.setLayout(new FlowLayout());
+				popup.setSize(400,400);
+				
+				JPanel popupGroups = new JPanel();
+				JLabel overhead = new JLabel("Move "+selectedStudent+" Where?");
+				overhead.setBounds(0, 0, 109, 14);
+				popup.add(overhead);
+				popup.setSize(400,400);
+				
+				JScrollPane groupsScroll = new JScrollPane();
+				groupsScroll.setViewportView(groupList);
+				popupGroups.setBounds(0,50,200,300);
+				popupGroups.add(groupsScroll);
+				popup.add(popupGroups);
+				JButton moveIt =new JButton("MOVE");
+				moveIt.setBounds(100,100,120,120);
+				//popup.add(moveIt);
+				popup.setVisible(true);
+			}
+		});
+		
 		contentPane.add(moveButton);
 		
 		JLabel groupsLabel = new JLabel("Group List:");
