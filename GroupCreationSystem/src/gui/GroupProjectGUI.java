@@ -136,6 +136,7 @@ public class GroupProjectGUI extends JFrame {
 		 * Philip
 		 */
 		
+		
 		// TEMOPRARILY CHANGED MOVE BUTTON TO SAY REFRESH //
 		JButton btnMove = new JButton("REFRESH");
 		btnMove.addActionListener(new ActionListener() {
