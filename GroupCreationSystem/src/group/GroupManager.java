@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import questionnaire.QuestionnaireManager;
 import strategy.BasicDistributionStrategy;
+import strategy.PreferenceDistributionStrategy;
 import utility.Group;
 import utility.Student;
 
@@ -21,6 +22,7 @@ public class GroupManager {
 	private PreferenceManager preferences;
 	private QuestionnaireManager questionnaire;
 	private int capacity;
+	
 	public GroupManager(Collection<Student> allStudents){
 		preferences=new PreferenceManager();
 		unassignedStudents=allStudents;
@@ -96,8 +98,10 @@ public class GroupManager {
 	 * 
 	 ****/
 	public void fillGroups(boolean Skill){
-		CreateGroupStrategy strategy = new BasicDistributionStrategy(unassignedStudents);//testing purposes only!
-		strategy.fillGroups(preferences.getInstructorPreferences(), groups);
+		CreateGroupStrategy strategy = new BasicDistributionStrategy(unassignedStudents);
+		strategy.fillGroups(groups);
+		
+		strategy= new PreferenceDistributionStrategy(unassignedStudents, preferences);
 	}
 
 	public void setSkillBased() {

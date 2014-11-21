@@ -23,7 +23,7 @@ public class BasicDistributionStrategy implements CreateGroupStrategy{
 	/****
 	 * Method used to fill the given groups with the given students
 	 */
-	public void fillGroups(Collection preferences, Collection<Group> groups) {
+	public void fillGroups(Collection<Group> groups) {
 
 		ArrayList<Student>addedStudents = new ArrayList<Student>();
 		for(Student s: unAddedStudents){
