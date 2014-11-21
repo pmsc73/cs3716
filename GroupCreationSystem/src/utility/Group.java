@@ -21,6 +21,7 @@ public class Group{
 		MAXSTUDENTS=max;
 		members=new ArrayList<Student>();
 		groupName = "Group "+id++;
+		numStudents=0;
 	}
 
 	/****
@@ -32,6 +33,7 @@ public class Group{
 		//if(numStudents<MAXSTUDENTS){
 			members.add(s);
 			numStudents++;
+			
 			
 		//}
 		//else return false;
