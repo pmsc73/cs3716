@@ -130,6 +130,7 @@ public class Controller {
 	 ****/
 	public Group getGroupByName(String name){
 		Group g = new Group(0);
+		g.setName(name);
 		Collection<Group> groups = sys.getGroups();
 		for(Group x: groups){
 			if (x.equals(g)) return x;

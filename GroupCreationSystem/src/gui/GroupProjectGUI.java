@@ -89,7 +89,7 @@ public class GroupProjectGUI extends JFrame {
 			 * 
 			 */
 			String g= group.getName();
-			System.out.println("HERE" + cont.getGroupByName(g));
+			System.out.println(g+" HERE" + cont.getGroupByName(g));
 			groupModel.addElement(group.getName());
 			//the model gets each group name added
 		}
