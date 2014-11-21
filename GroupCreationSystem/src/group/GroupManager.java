@@ -3,8 +3,9 @@ package group;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import Strategy.BasicDistributionStrategy;
+
 import questionnaire.QuestionnaireManager;
-import test.BasicDistributionStrategy;
 import utility.Group;
 import utility.Student;
 
