@@ -61,7 +61,7 @@ public class GroupProjectGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GroupProjectGUI(Controller controller) {
-		
+		final Controller cont=controller;
 		setTitle("Group Creation System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -76,11 +76,11 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(groupsPanel);
 		groupsPanel.setLayout(null);
 		
-		controller.generateGroups(); // makes the groups in the controller
+		cont.generateGroups(); // makes the groups in the controller
 		DefaultListModel<String> groupModel=new DefaultListModel<String>(); 
 		// groupModel is a list of the group names, effectively
 		
-		final Collection<Group> groups=controller.getGroups();
+		final Collection<Group> groups=cont.getGroups();
 		// list of all groups from controller
 		
 		for (Group group:groups){
@@ -167,8 +167,8 @@ public class GroupProjectGUI extends JFrame {
 		final JList<String> popupGroupList = new JList<String>(groupModel);
 		moveButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				String selectedGroup = groupList.getSelectedValue();
-				String selectedStudent= lstMembers.getSelectedValue();
+				final String selectedGroup = groupList.getSelectedValue();
+				final String selectedStudent= lstMembers.getSelectedValue();
 				if(selectedStudent == null){
 				}
 				else{
@@ -189,11 +189,15 @@ public class GroupProjectGUI extends JFrame {
 					popupGroups.add(groupsScroll);
 					popup.add(popupGroups);
 					JButton moveIt =new JButton("MOVE");
-					
+					//PUT IN MOVING TO THE ABYSS
 					moveIt.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent e){
 							String moveTo = popupGroupList.getSelectedValue(); 
-							System.out.println(moveTo);
+							Student student= cont.getStudentByName(selectedStudent);
+							Group fromGroup = cont.getGroupByName(selectedGroup.toLowerCase());
+							Group toGroup = cont.getGroupByName(moveTo);
+							//check if group is full
+							System.out.println(selectedGroup+" "+fromGroup);
 						}
 					});
 					
