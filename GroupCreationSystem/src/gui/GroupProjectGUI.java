@@ -240,6 +240,8 @@ public class GroupProjectGUI extends JFrame {
 									}
 								}
 							}
+							System.out.println("here");
+							groupList.setSelectedValue(moveTo,true);
 							popup.setVisible(false);
 						}
 					});
