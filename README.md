@@ -1,14 +1,3 @@
 cs3716
 ======
-Helpful hint:
-  If you encounter a conflict when pulling in a file you didn't want to change, right click and select replace with > HEAD Revision
-  
-Here's everyone's job for the week.
-UI design and how it looks- Noah/Matthew
-divide and add into groups-Emily
-UI functions attached to buttons- Noah/Matthew
-Merge Architecture-Noah
-parse students studentReader.java- Jonthan
-test the code-Matthew
-
-**NOTE: Everyone should document all the methods that they write**
+To run this project, open in eclipse, and run the file src/gui/View.java as an application. You will be prompted for a course name, and group size. The only valid input for course name is "cs3716", and this will make groups based on the list of students in cs3716.dat file.
