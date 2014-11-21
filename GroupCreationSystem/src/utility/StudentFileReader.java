@@ -38,12 +38,17 @@ public class StudentFileReader implements StudentReader {
 				line.useDelimiter(","); 
 				String name;
 				String number;
+				double gpa;
 				while(line.hasNext()) {
 					name = line.next();
 					if(line.hasNext()) {
 						number = line.next();
-						studentList.add(new Student(name,number));
+						if(line.hasNextDouble()) {
+							gpa = line.nextDouble();
+							studentList.add(new Student(name,number,gpa));
+						}
 					}
+					
 				}
 				line.close(); // eclipse suggest I close my scanners
 			}

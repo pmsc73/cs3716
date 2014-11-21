@@ -8,19 +8,22 @@ import schedule.Schedule;
 
 /****
  * Class to represent a student
- * @author Emily
+ * @author Emily, Philip
  *
  ****/
 public class Student {
 	private String name;
 	private String id;
+	private double gpa;
+	
 	private Schedule personalSched;
 	private ClassSchedule schedule;
 	private Collection<Question> questionnaire;
 	
-	public Student(String name, String id){
+	public Student(String name, String id, double gpa){
 		this.name=name;
 		this.id=id;
+		this.gpa=gpa;
 	}
 	
 
@@ -38,7 +41,9 @@ public class Student {
 	public String getId() {
 		return id;
 	}
-
+	public double getGPA() {
+		return gpa;
+	}
 
 	public Schedule getPersonalSched() {
 		return personalSched;

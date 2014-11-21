@@ -116,7 +116,7 @@ public class Controller {
 	 * 
 	 ****/
 	public Student getStudentByName(String name){
-		Student s = new Student(name, null);
+		Student s = new Student(name, null,0.0);
 		Collection<Student> students = sys.getStudents();
 		for(Student x: students){
 			if(s.equals(x)) return x;
