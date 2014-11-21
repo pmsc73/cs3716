@@ -84,15 +84,10 @@ public class GroupProjectGUI extends JFrame {
 		// list of all groups from controller
 		
 		for (Group group:groups){
-			/*
-			 * HI EMILY HERE IS THE TEST ENJOY PLEASE
-			 * 
-			 */
-			String g= group.getName();
-			System.out.println(g+" HERE" + cont.getGroupByName(g));
 			groupModel.addElement(group.getName());
 			//the model gets each group name added
 		}
+		groupModel.addElement("Unassigned");
 		
 		final JList<String> groupList = new JList<String>(groupModel);
 		// groupList is a list who implements the model
@@ -150,19 +145,7 @@ public class GroupProjectGUI extends JFrame {
 		scrlMembers.setColumnHeaderView(lstMembers);
 		groupMembersPanel.add(scrlMembers);
 		
-		JPanel unassignedPanel = new JPanel();
-		unassignedPanel.setBounds(173, 198, 251, 93);
-		contentPane.add(unassignedPanel);
-		unassignedPanel.setLayout(null);
 		
-		JList unassignedStudentList = new JList();
-		
-		unassignedStudentList.setBounds(0, 0, 251, 93);
-		
-		JScrollPane unassignedScroll = new JScrollPane();
-		unassignedScroll.setViewportView(unassignedStudentList);
-		unassignedScroll.setBounds(0, 0, 251, 93);
-		unassignedPanel.add(unassignedScroll);
 		
 		JButton moveButton = new JButton("MOVE");
 		
@@ -170,7 +153,15 @@ public class GroupProjectGUI extends JFrame {
 		//listener for move button, onclick it opens a popup window
 		//for the group to move the selected student into.
 		//remember to allow moving student to unassigned.
-		final JList<String> popupGroupList = new JList<String>(groupModel);
+		DefaultListModel<String> popupGroupModel=new DefaultListModel<String>(); 
+		for (Group group:groups){
+			popupGroupModel.addElement(group.getName());
+			//the model gets each group name added
+		}
+		//HERE WE ARE WAHOO
+		popupGroupModel.addElement("Unassigned");
+		
+		final JList<String> popupGroupList = new JList<String>(popupGroupModel);
 		moveButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				final String selectedGroup = groupList.getSelectedValue();
@@ -200,10 +191,18 @@ public class GroupProjectGUI extends JFrame {
 						public void actionPerformed(ActionEvent e){
 							String moveTo = popupGroupList.getSelectedValue(); 
 							Student student= cont.getStudentByName(selectedStudent);
-							Group fromGroup = cont.getGroupByName(selectedGroup.toLowerCase());
+							Group fromGroup = cont.getGroupByName(selectedGroup);
 							Group toGroup = cont.getGroupByName(moveTo);
 							//check if group is full
-							System.out.println(selectedGroup+" "+fromGroup);
+							if(!toGroup.isFull()){
+								
+							}
+							else{
+								JDialog popup2 = new JDialog();
+								popup2.setSize(50,200);
+								popup2.add(new JLabel(toGroup.getName()+" is full. Please move Students to 'Unassigned'."));
+								popup2.setVisible(true);
+							}
 						}
 					});
 					
@@ -226,10 +225,6 @@ public class GroupProjectGUI extends JFrame {
 		membersLabel.setBounds(172, 5, 117, 14);
 		contentPane.add(membersLabel);
 		
-		JLabel unassignedLabel = new JLabel("Unassigned Members:");
-		unassignedLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		unassignedLabel.setBounds(172, 175, 153, 14);
-		contentPane.add(unassignedLabel);
 	}
 }
 
