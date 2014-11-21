@@ -152,6 +152,7 @@ public class GroupProjectGUI extends JFrame {
 		JScrollPane scrlMembers = new JScrollPane();
 		scrlMembers.setBounds(0, 0, 252, 120);
 		scrlMembers.setColumnHeaderView(lstMembers);
+		scrlMembers.setViewportView(lstMembers);
 		groupMembersPanel.add(scrlMembers);
 		
 		
