@@ -117,23 +117,32 @@ public class GroupProjectGUI extends JFrame {
 				}
 				int i = 0;
 				lmModel.clear(); //make sure lmModel is empty to begin
-				for(i=0;i<groups.size();i++){
-					//debugging print
-					System.out.println( ((ArrayList<Group>)groups).get(i).getName() + " : " + groupList.getSelectedValue());
-					
-					// tl;dr for this if: current selected group name == group(i) 
-					if ((((ArrayList<Group>)groups).get(i).getName()).equals(groupList.getSelectedValue())) {
-						System.out.println("success"); //prints our success
-						break;
+				//handles getting the unassigned students
+				if(groupList.getSelectedValue()=="Unassigned"){
+					Collection<Student> unassignedCollection = cont.getUnassignedStudents();
+					for (Student stud:unassignedCollection){
+						lmModel.addElement(stud.getName());
 					}
 				}
-				ArrayList<Student> students = new ArrayList<Student>();
-				if (i<groups.size()) {
-					students = (ArrayList<Student>) ((ArrayList<Group>)groups).get(i).getGroupMembers();
-				}
-				for(Student student : students){ 
-					System.out.println(student.getName());
-					lmModel.addElement(student.getName());
+				else{
+					for(i=0;i<groups.size();i++){
+						//debugging print
+						System.out.println( ((ArrayList<Group>)groups).get(i).getName() + " : " + groupList.getSelectedValue());
+						
+						// tl;dr for this if: current selected group name == group(i) 
+						if ((((ArrayList<Group>)groups).get(i).getName()).equals(groupList.getSelectedValue())) {
+							System.out.println("success"); //prints our success
+							break;
+						}
+					}
+					ArrayList<Student> students = new ArrayList<Student>();
+					if (i<groups.size()) {
+						students = (ArrayList<Student>) ((ArrayList<Group>)groups).get(i).getGroupMembers();
+					}
+					for(Student student : students){ 
+						System.out.println(student.getName());
+						lmModel.addElement(student.getName());
+					}
 				}
 				
 			}
@@ -170,7 +179,7 @@ public class GroupProjectGUI extends JFrame {
 				}
 				else{
 					
-					JDialog popup = new JDialog();
+					final JDialog popup = new JDialog();
 					popup.setLayout(new FlowLayout());
 					popup.setSize(400,400);
 					
@@ -191,18 +200,27 @@ public class GroupProjectGUI extends JFrame {
 						public void actionPerformed(ActionEvent e){
 							String moveTo = popupGroupList.getSelectedValue(); 
 							Student student= cont.getStudentByName(selectedStudent);
-							Group fromGroup = cont.getGroupByName(selectedGroup);
-							Group toGroup = cont.getGroupByName(moveTo);
+							Group fromGroup = cont.getGroupByName(selectedGroup);//HANDLE IF FROM GROUP IS UNASSIGNED
 							//check if group is full
-							if(!toGroup.isFull()){
-								
+							if (moveTo=="Unassigned"){
+								cont.removeStudent(student, fromGroup);
+								System.out.println("HERE");
 							}
 							else{
-								JDialog popup2 = new JDialog();
-								popup2.setSize(50,200);
-								popup2.add(new JLabel(toGroup.getName()+" is full. Please move Students to 'Unassigned'."));
-								popup2.setVisible(true);
+								Group toGroup = cont.getGroupByName(moveTo);
+								if(!toGroup.isFull()){
+									cont.removeStudent(student,fromGroup);
+									cont.addStudent(student, toGroup);
+								}
+								else{
+									
+									JDialog popup2 = new JDialog();
+									popup2.setSize(50,200);
+									popup2.add(new JLabel(toGroup.getName()+" is full. Please move Students to 'Unassigned'."));
+									popup2.setVisible(true);
+								}
 							}
+							popup.setVisible(false);
 						}
 					});
 					
