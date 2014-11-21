@@ -210,14 +210,6 @@ public class GroupProjectGUI extends JFrame {
 									Group toGroup = cont.getGroupByName(moveTo);
 
 									cont.addStudent(student, toGroup);
-									
-									if(!toGroup.isFull()){
-										
-										JDialog popup2 = new JDialog();
-										popup2.setSize(50,200);
-										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" is full. Moved anyways."));
-										popup2.setVisible(true);
-									}
 								}
 							}
 							else{
@@ -236,7 +228,7 @@ public class GroupProjectGUI extends JFrame {
 										
 										JDialog popup2 = new JDialog();
 										popup2.setSize(50,200);
-										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" moved anyways."));
+										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" is full, moved anyways."));
 										popup2.setVisible(true);
 									}
 								}
