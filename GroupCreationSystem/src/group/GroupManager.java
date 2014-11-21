@@ -20,7 +20,7 @@ public class GroupManager {
 	private Collection<Student> unassignedStudents;
 	private PreferenceManager preferences;
 	private QuestionnaireManager questionnaire;
-	
+	private int capacity;
 	public GroupManager(Collection<Student> allStudents){
 		preferences=new PreferenceManager();
 		unassignedStudents=allStudents;
@@ -34,6 +34,7 @@ public class GroupManager {
 	 ****/
 	public Collection<Group> createEmptyGroups(int numStudents, int maxCap){
 			Collection<Integer> groupSizes=calculateGroupSizes(numStudents,maxCap);
+			capacity=maxCap;
 			groups=new ArrayList<Group>();
 			for(Integer i: groupSizes){
 				groups.add(new Group(i));
@@ -115,5 +116,8 @@ public class GroupManager {
 	 ****/
 	public Collection<Student> getUnaddedStudents() {
 		return unassignedStudents;
+	}
+	public int getMaxGroupSize(){
+		return capacity;
 	}
 }

@@ -227,7 +227,7 @@ public class GroupProjectGUI extends JFrame {
 									if(toGroup.isFull()) {
 										JDialog popup2 = new JDialog();
 										popup2.setSize(50,200);
-										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" is full, moved anyways."));
+										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" is full, moved anyway."));
 										popup2.setVisible(true);
 									}
 									*/
