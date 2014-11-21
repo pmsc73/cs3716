@@ -223,14 +223,14 @@ public class GroupProjectGUI extends JFrame {
 									
 									cont.removeStudent(student,fromGroup);
 									cont.addStudent(student, toGroup);
-					
-									if(toGroup.isFull()){
-										
+									/* This was here for testing, had a problem tho, so ignoring for now
+									if(toGroup.isFull()) {
 										JDialog popup2 = new JDialog();
 										popup2.setSize(50,200);
 										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" is full, moved anyways."));
 										popup2.setVisible(true);
 									}
+									*/
 								}
 							}
 							System.out.println("here");
