@@ -77,6 +77,12 @@ public class Group{
 		System.out.println("____________________");
 		
 	}
+	public int getGroupCapacity(){
+		return MAXSTUDENTS;
+	}
+	public int getCurrentSize(){
+		return numStudents;
+	}
 
 
 }
