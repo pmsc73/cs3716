@@ -198,26 +198,46 @@ public class GroupProjectGUI extends JFrame {
 					//PUT IN MOVING TO THE ABYSS
 					moveIt.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent e){
+							//if from the unassigned list
 							String moveTo = popupGroupList.getSelectedValue(); 
 							Student student= cont.getStudentByName(selectedStudent);
-							Group fromGroup = cont.getGroupByName(selectedGroup);//HANDLE IF FROM GROUP IS UNASSIGNED
-							//check if group is full
-							if (moveTo=="Unassigned"){
-								cont.removeStudent(student, fromGroup);
-								System.out.println("HERE");
-							}
-							else{
-								Group toGroup = cont.getGroupByName(moveTo);
-								if(!toGroup.isFull()){
-									cont.removeStudent(student,fromGroup);
-									cont.addStudent(student, toGroup);
+							if (selectedGroup =="Unassigned"){
+								if (moveTo=="Unassigned"){
+									//do nothing should change this
 								}
 								else{
+									Group toGroup = cont.getGroupByName(moveTo);
+
+									cont.addStudent(student, toGroup);
 									
-									JDialog popup2 = new JDialog();
-									popup2.setSize(50,200);
-									popup2.add(new JLabel(toGroup.getName()+" is full. Please move Students to 'Unassigned'."));
-									popup2.setVisible(true);
+									if(!toGroup.isFull()){
+										
+										JDialog popup2 = new JDialog();
+										popup2.setSize(50,200);
+										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" is full. Moved anyways."));
+										popup2.setVisible(true);
+									}
+								}
+							}
+							else{
+								Group fromGroup = cont.getGroupByName(selectedGroup);//HANDLE IF FROM GROUP IS UNASSIGNED
+								//check if group is full
+								if (moveTo=="Unassigned"){
+									cont.removeStudent(student, fromGroup);
+								}
+								else{
+									Group toGroup = cont.getGroupByName(moveTo);
+									
+									cont.removeStudent(student,fromGroup);
+									cont.addStudent(student, toGroup);
+					
+									if(toGroup.isFull()){
+										
+										JDialog popup2 = new JDialog();
+										popup2.setSize(50,200);
+										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" moved anyways."));
+										popup2.setVisible(true);
+									}
 								}
 							}
 							popup.setVisible(false);
