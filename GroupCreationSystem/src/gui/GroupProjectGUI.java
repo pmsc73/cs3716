@@ -84,6 +84,12 @@ public class GroupProjectGUI extends JFrame {
 		// list of all groups from controller
 		
 		for (Group group:groups){
+			/*
+			 * HI EMILY HERE IS THE TEST ENJOY PLEASE
+			 * 
+			 */
+			String g= group.getName();
+			System.out.println("HERE" + cont.getGroupByName(g));
 			groupModel.addElement(group.getName());
 			//the model gets each group name added
 		}
