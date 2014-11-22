@@ -33,11 +33,18 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class GroupProjectGUI extends JFrame {
 	private Controller controller;
 	private JPanel contentPane;
+	private JTextField txtCourseNumber;
+	private JTextField textField;
 
 	/**
 	 * Launch the GUI page.
@@ -65,14 +72,14 @@ public class GroupProjectGUI extends JFrame {
 		setTitle("Group Creation System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setBounds(100, 100, 450, 340);
+		setBounds(100, 100, 555, 267);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel groupsPanel = new JPanel();
-		groupsPanel.setBounds(10, 30, 109, 263);
+		groupsPanel.setBounds(10, 85, 109, 131);
 		contentPane.add(groupsPanel);
 		groupsPanel.setLayout(null);
 		
@@ -97,11 +104,11 @@ public class GroupProjectGUI extends JFrame {
 		JScrollPane scrlGroups = new JScrollPane();
 		scrlGroups.setViewportBorder(null);
 		scrlGroups.setViewportView(groupList);
-		scrlGroups.setBounds(0, 0, 109, 263);
+		scrlGroups.setBounds(0, 0, 109, 131);
 		groupsPanel.add(scrlGroups);
 		
 		JPanel groupMembersPanel = new JPanel();
-		groupMembersPanel.setBounds(172, 30, 252, 120);
+		groupMembersPanel.setBounds(172, 85, 252, 131);
 		contentPane.add(groupMembersPanel);
 		groupMembersPanel.setLayout(null);
 		
@@ -150,8 +157,9 @@ public class GroupProjectGUI extends JFrame {
 		lstMembers.setBounds(0, 0, 252, 120);
 		
 		JScrollPane scrlMembers = new JScrollPane();
-		scrlMembers.setBounds(0, 0, 252, 120);
+		scrlMembers.setBounds(0, 0, 252, 130);
 		scrlMembers.setColumnHeaderView(lstMembers);
+		scrlMembers.setViewportView(lstMembers);
 		groupMembersPanel.add(scrlMembers);
 		
 		
@@ -180,20 +188,20 @@ public class GroupProjectGUI extends JFrame {
 				else{
 					
 					final JDialog popup = new JDialog();
-					popup.setLayout(new FlowLayout());
+					popup.getContentPane().setLayout(new FlowLayout());
 					popup.setSize(400,400);
 					
 					final JPanel popupGroups = new JPanel();
 					JLabel overhead = new JLabel("Move "+selectedStudent+" Where?");
 					overhead.setBounds(0, 0, 109, 14);
-					popup.add(overhead);
+					popup.getContentPane().add(overhead);
 					popup.setSize(300,300);
 					
 					JScrollPane groupsScroll = new JScrollPane();
 					groupsScroll.setViewportView(popupGroupList);
 					popupGroups.setBounds(0,20,200,300);
 					popupGroups.add(groupsScroll);
-					popup.add(popupGroups);
+					popup.getContentPane().add(popupGroups);
 					JButton moveIt =new JButton("MOVE");
 					//PUT IN MOVING TO THE ABYSS
 					moveIt.addActionListener(new ActionListener(){
@@ -209,14 +217,6 @@ public class GroupProjectGUI extends JFrame {
 									Group toGroup = cont.getGroupByName(moveTo);
 
 									cont.addStudent(student, toGroup);
-									
-									if(!toGroup.isFull()){
-										
-										JDialog popup2 = new JDialog();
-										popup2.setSize(50,200);
-										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" is full. Moved anyways."));
-										popup2.setVisible(true);
-									}
 								}
 							}
 							else{
@@ -230,22 +230,24 @@ public class GroupProjectGUI extends JFrame {
 									
 									cont.removeStudent(student,fromGroup);
 									cont.addStudent(student, toGroup);
-					
-									if(toGroup.isFull()){
-										
+									/* This was here for testing, had a problem tho, so ignoring for now
+									if(toGroup.isFull()) {
 										JDialog popup2 = new JDialog();
 										popup2.setSize(50,200);
-										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" moved anyways."));
+										popup2.add(new JLabel("WARNING: "+toGroup.getName()+" is full, moved anyways."));
 										popup2.setVisible(true);
 									}
+									*/
 								}
 							}
+							System.out.println("here");
+							groupList.setSelectedValue(moveTo,true);
 							popup.setVisible(false);
 						}
 					});
 					
 					moveIt.setBounds(100,100,120,120);
-					popup.add(moveIt);
+					popup.getContentPane().add(moveIt);
 					popup.setVisible(true);
 				}
 			}
@@ -255,13 +257,51 @@ public class GroupProjectGUI extends JFrame {
 		
 		JLabel groupsLabel = new JLabel("Group List:");
 		groupsLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		groupsLabel.setBounds(10, 5, 109, 14);
+		groupsLabel.setBounds(10, 60, 109, 14);
 		contentPane.add(groupsLabel);
 		
 		JLabel membersLabel = new JLabel("Group Members:");
 		membersLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		membersLabel.setBounds(172, 5, 117, 14);
+		membersLabel.setBounds(176, 60, 117, 14);
 		contentPane.add(membersLabel);
+		
+		txtCourseNumber = new JTextField();
+		txtCourseNumber.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		txtCourseNumber.setBounds(95, 11, 86, 20);
+		contentPane.add(txtCourseNumber);
+		txtCourseNumber.setColumns(10);
+		
+		JLabel lblCourseName = new JLabel("Course name:");
+		lblCourseName.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblCourseName.setBounds(10, 14, 86, 14);
+		contentPane.add(lblCourseName);
+		
+		JLabel lblGroupSize = new JLabel("Group size:");
+		lblGroupSize.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblGroupSize.setBounds(202, 14, 71, 14);
+		contentPane.add(lblGroupSize);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textField.setBounds(272, 11, 86, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnCreate = new JButton("CREATE");
+		btnCreate.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnCreate.setBounds(398, 10, 89, 23);
+		contentPane.add(btnCreate);
+		
+		JButton btnMove = new JButton("MOVE");
+		btnMove.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnMove.setBounds(442, 84, 89, 23);
+		contentPane.add(btnMove);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Group 1", "Group 2", "Group 3", "Group 4", "One Fiech", "Two Fiech", "Red Fiech", "Blue Fiech"}));
+		comboBox.setBounds(442, 118, 89, 23);
+		contentPane.add(comboBox);
 		
 	}
 }

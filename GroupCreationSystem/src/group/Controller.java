@@ -5,6 +5,10 @@ package group;
 
 import java.util.Collection;
 
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import utility.Group;
 import utility.Student;
 
@@ -85,8 +89,14 @@ public class Controller {
 	 ****/
 	public void addStudent(Student s, Group g){
 		GroupManager creator = sys.getGroupManager();
+		if(g.getCurrentSize()>=creator.getMaxGroupSize()){
+			JDialog popup2 = new JDialog();
+			popup2.setSize(200,50);
+			popup2.add(new JLabel("WARNING: "+g.getName()+" is over capacity!"));
+			popup2.setVisible(true);
+		}
 		creator.addStudent(s, g);
-		if(g.isFull());//throw an exception
+		
 		
 	}
 	/****
@@ -116,7 +126,7 @@ public class Controller {
 	 * 
 	 ****/
 	public Student getStudentByName(String name){
-		Student s = new Student(name, null);
+		Student s = new Student(name, null,0.0);
 		Collection<Student> students = sys.getStudents();
 		for(Student x: students){
 			if(s.equals(x)) return x;

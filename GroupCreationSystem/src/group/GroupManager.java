@@ -3,8 +3,10 @@ package group;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 import questionnaire.QuestionnaireManager;
-import test.BasicDistributionStrategy;
+import strategy.BasicDistributionStrategy;
+import strategy.PreferenceDistributionStrategy;
 import utility.Group;
 import utility.Student;
 
@@ -19,6 +21,7 @@ public class GroupManager {
 	private Collection<Student> unassignedStudents;
 	private PreferenceManager preferences;
 	private QuestionnaireManager questionnaire;
+	private int capacity;
 	
 	public GroupManager(Collection<Student> allStudents){
 		preferences=new PreferenceManager();
@@ -33,6 +36,7 @@ public class GroupManager {
 	 ****/
 	public Collection<Group> createEmptyGroups(int numStudents, int maxCap){
 			Collection<Integer> groupSizes=calculateGroupSizes(numStudents,maxCap);
+			capacity=maxCap;
 			groups=new ArrayList<Group>();
 			for(Integer i: groupSizes){
 				groups.add(new Group(i));
@@ -94,8 +98,10 @@ public class GroupManager {
 	 * 
 	 ****/
 	public void fillGroups(boolean Skill){
-		CreateGroupStrategy strategy = new BasicDistributionStrategy(unassignedStudents);//testing purposes only!
-		strategy.fillGroups(preferences.getInstructorPreferences(), groups);
+		CreateGroupStrategy strategy = new BasicDistributionStrategy(unassignedStudents);
+		strategy.fillGroups(groups);
+		
+		strategy= new PreferenceDistributionStrategy(unassignedStudents, preferences);
 	}
 
 	public void setSkillBased() {
@@ -114,5 +120,8 @@ public class GroupManager {
 	 ****/
 	public Collection<Student> getUnaddedStudents() {
 		return unassignedStudents;
+	}
+	public int getMaxGroupSize(){
+		return capacity;
 	}
 }

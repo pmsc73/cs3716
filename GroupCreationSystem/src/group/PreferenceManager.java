@@ -22,10 +22,11 @@ public class PreferenceManager {
 	public Preference getStudentUnPreferred(Student s){
 		return null;
 	}
-	public void addPreference(Student s1, Student s2, boolean preferred){
+	public void addProfessorPreference(Student s1, Student s2, boolean preferred){
 		//this method should check that the preference is not in the professor's list of disallowed preferences, or in the students list of unpreferred partners. Otherwise it can be added.
 	}
-	public void removePreference(Student s1, Student s2, boolean preferred){
+	public void removeProfessorPreference(Student s1, Student s2, boolean preferred){
 		
 	}
+	
 }
