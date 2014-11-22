@@ -24,6 +24,9 @@ public class GroupCreationSystem {
 
 	public GroupCreationSystem(){
 		initialized=false;
+		courseNumber="";
+		groupSize=0;
+		
 	}
 	/****
 	 * Method makes empty groups

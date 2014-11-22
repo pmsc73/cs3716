@@ -1,16 +1,16 @@
 /**
  * 
  */
-package group;
+package utility;
+
+import group.GroupCreationSystem;
+import group.GroupManager;
 
 import java.util.Collection;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import utility.Group;
-import utility.Student;
 
 /****
  * Controller class which contains all of the methods that the GUI might need. Responsible for

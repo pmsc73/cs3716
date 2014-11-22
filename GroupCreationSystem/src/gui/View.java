@@ -6,7 +6,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import group.Controller;
+import utility.Controller;
 
 /**
  * @author Philip

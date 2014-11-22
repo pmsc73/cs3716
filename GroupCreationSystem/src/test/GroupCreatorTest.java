@@ -3,10 +3,10 @@ package test;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import utility.Controller;
 import utility.Group;
 import utility.Student;
 import utility.StudentFileReader;
-import group.Controller;
 import group.GroupCreationSystem;
 import group.GroupManager;
 
