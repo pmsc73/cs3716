@@ -101,7 +101,7 @@ public class GroupManager {
 		CreateGroupStrategy strategy = new BasicDistributionStrategy(unassignedStudents);
 		strategy.fillGroups(groups);
 		
-		strategy= new PreferenceDistributionStrategy(unassignedStudents, preferences);
+		//strategy= new PreferenceDistributionStrategy(unassignedStudents, preferences);
 	}
 
 	public void setSkillBased() {
