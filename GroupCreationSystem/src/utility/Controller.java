@@ -129,7 +129,7 @@ public class Controller {
 		Student s = new Student(name, null,0.0);
 		Collection<Student> students = sys.getStudents();
 		for(Student x: students){
-			if(s.equals(x)) return x;
+			if(s.equalsByName(x)) return x;
 		}
 		return null;
 	}

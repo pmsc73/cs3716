@@ -68,7 +68,14 @@ public class Student {
 		return s;
 	}
 	public boolean equals(Object o){
-		return this.name.equals(((Student)o).name);
+		return this.name.equals(((Student)o).name)&&this.id.equals(((Student)o).id);
+	}
+
+
+
+	
+	public boolean equalsByName(Student x) {
+		return x.name.equalsIgnoreCase(this.name);
 	}
 }
 

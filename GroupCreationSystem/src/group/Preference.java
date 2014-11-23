@@ -36,8 +36,22 @@ public class Preference {
 	public int getLevel() {
 		return this.level;
 	}
-	public boolean doesInvolve(Student s){
+	public boolean involves(Student s){
 		return student1.equals(s)||student2.equals(s);
+	}
+	/**
+	 * @param s
+	 * @return
+	 */
+	public Student getPartner(Student s) {
+		if (s.equals(student1)) return student2;
+		if (s.equals(student2)) return student1;
+		return null;
+	}
+	public boolean equals(Object o){
+		Preference pref = (Preference)o;
+		boolean studentsEqual = (this.student1.equals(pref.student1)||this.student1.equals(pref.student2))&&(this.student2.equals(pref.student1)||this.student2.equals(pref.student2));
+		return studentsEqual&&equals(this.level==pref.level);
 	}
 
 }
