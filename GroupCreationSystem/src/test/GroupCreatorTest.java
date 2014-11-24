@@ -24,6 +24,37 @@ public class GroupCreatorTest {
 		//testMemberDivision(40, 3);
 		//importTest("cs3716.dat");
 		controllerTest();
+		controllerResetTest();
+	}
+	/**
+	 * 
+	 */
+	private static void controllerResetTest() {
+		Controller control = new Controller();
+		control.setGroupSize(3);
+		control.setCourseNumber("cs3716");
+		control.finalizeParameters();
+		control.generateGroups();
+		Collection<Group> groups = control.getGroups();
+		Collection<Student> students =control.getAllStudents();
+		Object[] students2 =  students.toArray();
+		Object[] groups2=  groups.toArray();
+		System.out.println("Generated these groups:\n______________________");
+		for(Group g: groups){
+			g.printGroup();
+		
+		}
+		System.out.println("Changing group size to 6");
+		control.setGroupSize(6);
+		control.finalizeParameters();
+		control.generateGroups();
+		groups = control.getGroups();
+		System.out.println("Generated these groups:\n______________________");
+		for(Group g: groups){
+			g.printGroup();
+		
+		}
+		
 	}
 	/****
 	 * Method to test that the groups are created with appropriate maximum student values

@@ -84,7 +84,7 @@ public class GroupProjectGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JPanel groupsPanel = new JPanel();
+		final JPanel groupsPanel = new JPanel();
 		groupsPanel.setBounds(10, 85, 109, 131);
 		contentPane.add(groupsPanel);
 		groupsPanel.setLayout(null);
@@ -113,7 +113,7 @@ public class GroupProjectGUI extends JFrame {
 
 		JButton btnCreate = new JButton("CREATE");
 		btnCreate.addActionListener(new ActionListener() {
-
+			
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					groupSize = Integer.parseInt(txtSize.getText());
