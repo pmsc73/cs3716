@@ -23,8 +23,8 @@ public class GroupManager {
 	private QuestionnaireManager questionnaire;
 	private int capacity;
 	
-	public GroupManager(Collection<Student> allStudents){
-		preferences=new PreferenceManager();
+	public GroupManager(Collection<Student> allStudents, PreferenceManager p){
+		preferences=p;
 		unassignedStudents=allStudents;
 	}
 	
@@ -88,20 +88,25 @@ public class GroupManager {
 		g.add(s);
 		unassignedStudents.remove(s);
 	}
-	//not really used (yet?)
+	/*
 	public void addRemainingStudents(Collection<Student> students){
 		CreateGroupStrategy strategy = new BasicDistributionStrategy(unassignedStudents);//testing purposes only!
 		strategy.addRemainingStudents(groups, unassignedStudents);
-	}
+	}*/
 	/****
 	 * Method to fill the groups
 	 * 
 	 ****/
 	public void fillGroups(boolean Skill){
-		CreateGroupStrategy strategy = new BasicDistributionStrategy(unassignedStudents);
+		CreateGroupStrategy strategy;
+		if(preferences.hasPreferences()){
+			strategy= new PreferenceDistributionStrategy(unassignedStudents, preferences);
+		}
+		else{
+			strategy = new BasicDistributionStrategy(unassignedStudents);
+		}
 		strategy.fillGroups(groups);
-		
-		//strategy= new PreferenceDistributionStrategy(unassignedStudents, preferences);
+		strategy.addRemainingStudents(groups, unassignedStudents);
 	}
 
 	public void setSkillBased() {

@@ -9,7 +9,13 @@ import utility.Student;
 public class PreferenceManager {
 	private HashSet<Preference> requiredGroups;
 	private HashSet<Preference> disallowedGroups;
+	private boolean hasPreferences=false;
 	
+	public PreferenceManager(){
+		disallowedGroups= new HashSet<Preference>();
+		requiredGroups = new HashSet<Preference>();
+		
+	}
 	public Collection<Preference> getInstructorPreferences(){
 		return requiredGroups;
 	}
@@ -27,12 +33,20 @@ public class PreferenceManager {
 			p=disallowedGroups.iterator().next();
 			students.add(p.getSource());
 			students.add(p.getTarget());
+			disallowedGroups.remove(p);
+			ArrayList<Preference> usedPreferences = new ArrayList<Preference>();
 			for(Preference x: disallowedGroups){
+
+				ArrayList<Student> newStudents = new ArrayList<Student>();
 				for(Student s: students){
-					if(x.involves(s)) students.add(x.getPartner(s));
-					disallowedGroups.remove(x);
+					if(x.involves(s)){
+						newStudents.add(x.getPartner(s));
+						usedPreferences.add(x);
+					}
 				}
+				for(Student s: newStudents) students.add(s);
 			}
+			for(Preference x: usedPreferences)disallowedGroups.remove(x);
 			return students;
 		}
 		
@@ -49,12 +63,16 @@ public class PreferenceManager {
 			p=requiredGroups.iterator().next();
 			students.add(p.getSource());
 			students.add(p.getTarget());
+			ArrayList<Preference> usedPreferences = new ArrayList<Preference>();
 			for(Preference x: requiredGroups){
+				ArrayList<Student> newStudents = new ArrayList<Student>();
 				for(Student s: students){
-					if(x.involves(s)) students.add(x.getPartner(s));
-					requiredGroups.remove(x);
+					if(x.involves(s)) newStudents.add(x.getPartner(s));
+					usedPreferences.add(x);
 				}
+				for(Student s: newStudents) students.add(s);
 			}
+			for(Preference x: usedPreferences)disallowedGroups.remove(x);
 			return students;
 		}
 		
@@ -74,6 +92,11 @@ public class PreferenceManager {
 		if(pref==-1){
 			disallowedGroups.add(new Preference(s1,s2,pref));
 		}
+		hasPreferences=true;
 	}
+	public boolean hasPreferences(){
+		return hasPreferences;
+	}
+
 	
 }

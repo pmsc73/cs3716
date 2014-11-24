@@ -2,6 +2,7 @@ package test;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 import utility.Controller;
 import utility.Group;
@@ -9,12 +10,13 @@ import utility.Student;
 import utility.StudentFileReader;
 import group.GroupCreationSystem;
 import group.GroupManager;
+import group.Preference;
+import group.PreferenceManager;
 
-/**
+/****
  * Test class to make sure that the system divides the students into reasonably sized groups
  * @author Emily
- *
- */
+ ****/
 public class GroupCreatorTest {
 	public static void main(String[] args){
 		//testMemberDivision(29,5);
@@ -23,12 +25,18 @@ public class GroupCreatorTest {
 		//testMemberDivision(6,2);
 		//testMemberDivision(40, 3);
 		//importTest("cs3716.dat");
+		System.out.println("Controller Test\n____________________________________");
 		controllerTest();
+		System.out.println("Controller Reset Test\n____________________________________");
 		controllerResetTest();
+		System.out.println("Creation Test, negative preferences only\n____________________________________");
+		negativePreferenceCreation();
+		System.out.println("Creation Test, postive preferences only\n____________________________________");
+		positivePreferenceCreation();
 	}
-	/**
-	 * 
-	 */
+	/****
+	 * A test to make sure that you can regenerate the groups with a different size
+	 ****/
 	private static void controllerResetTest() {
 		Controller control = new Controller();
 		control.setGroupSize(3);
@@ -63,7 +71,7 @@ public class GroupCreatorTest {
 	 ****/
 	public static void testMemberDivision(int total, int groupsize){
 		System.out.println("Dividing "+ total+" members into groups of " +groupsize);
-		GroupManager x=new GroupManager(null);
+		GroupManager x=new GroupManager(null,new PreferenceManager());
 		ArrayList<Integer> ints;
 		ints=(ArrayList<Integer>) x.calculateGroupSizes(total, groupsize);
 		int total2=0;
@@ -122,4 +130,53 @@ public class GroupCreatorTest {
 		}
 		
 	}
+	/****
+	 * Method to test that group creation works with preferences
+	 *****/
+	public static void negativePreferenceCreation(){
+		Controller control = new Controller();
+		control.setGroupSize(3);
+		control.setCourseNumber("cs3716");
+		control.finalizeParameters();
+		ArrayList<Student> students =(ArrayList<Student>)control.getAllStudents();
+		Random r= new Random();
+		int size =control.getAllStudents().size();
+		for (int i=0;i<3;i++){
+			Student s1=students.get(r.nextInt(size));
+			Student s2=students.get(r.nextInt(size));
+			System.out.println(s1+" cant work with "+s2);
+			control.addPreference(s1,s2, false);
+		}
+		control.generateGroups();
+		Collection<Group> groups = control.getGroups();
+		System.out.println("Generated these groups:\n______________________");
+		for(Group g: groups){
+			g.printGroup();
+		
+		}
+		
+	}
+	public static void positivePreferenceCreation(){
+		Controller control = new Controller();
+		control.setGroupSize(3);
+		control.setCourseNumber("cs3716");
+		control.finalizeParameters();
+		ArrayList<Student> students =(ArrayList<Student>)control.getAllStudents();
+		Random r= new Random();
+		int size =control.getAllStudents().size();
+		for (int i=0;i<3;i++){
+			Student s1=students.get(r.nextInt(size));
+			Student s2=students.get(r.nextInt(size));
+			System.out.println(s1+" must work with "+s2);
+			control.addPreference(s1,s2, true);
+		}
+		control.generateGroups();
+		Collection<Group> groups = control.getGroups();
+		System.out.println("Generated these groups:\n______________________");
+		for(Group g: groups){
+			g.printGroup();
+		
+		}
+	}
+
 }

@@ -241,7 +241,7 @@ public class GroupProjectGUI extends JFrame {
 				}
 				moveGroupModel.addElement("Unassigned");
 
-				JComboBox cmbGroups = new JComboBox();
+				final JComboBox cmbGroups = new JComboBox();
 				cmbGroups.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				cmbGroups.setModel(moveGroupModel);
 				cmbGroups.setBounds(442, 118, 89, 23);

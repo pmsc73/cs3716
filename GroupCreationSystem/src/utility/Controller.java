@@ -148,7 +148,9 @@ public class Controller {
 		return null;
 		
 	}
-	public void reset(){
+	public void addPreference(Student s1, Student s2, boolean preferred){
+		if(preferred) sys.addPreference(s1,s2,1);
+		else sys.addPreference(s1,s2,-1);
 		
 	}
 }

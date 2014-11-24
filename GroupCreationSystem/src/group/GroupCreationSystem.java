@@ -21,9 +21,10 @@ public class GroupCreationSystem {
 	private GroupManager creator;
 	boolean initialized;
 	private Collection<Student> allStudents;
-
+	private PreferenceManager manager;
 	public GroupCreationSystem(){
 		initialized=false;
+		manager=new PreferenceManager();
 		courseNumber="";
 		groupSize=0;
 		
@@ -34,14 +35,7 @@ public class GroupCreationSystem {
 	 ****/
 	public Collection<Group> startEmptyGroups(){
 		initialize();
-		allStudents=Registrar.getStudents(courseNumber);
-		ArrayList<Student> copy = new ArrayList<Student>();
-		for(Student s: allStudents){
-			Registrar.getSchoolSchedule(s);
-			copy.add(s);
-		}
-		
-		creator= new GroupManager(copy);
+		setCourseNumber(courseNumber);
 		creator.createEmptyGroups(allStudents.size(), groupSize);
 		if(skillBased){
 			creator.setSkillBased();
@@ -80,11 +74,19 @@ public class GroupCreationSystem {
 	public String getCourseNumber() {
 		return courseNumber;
 	}
-	/**
-	 * @param courseNumber the courseNumber to set
-	 */
+	/****
+	 * This method will also load the students from this course into the system.
+	 * @param courseNumber the courseNumber to set. 
+	 ****/
 	public void setCourseNumber(String courseNumber) {
 		this.courseNumber = courseNumber;
+		allStudents=Registrar.getStudents(courseNumber);
+		ArrayList<Student> copy = new ArrayList<Student>();
+		for(Student s: allStudents){
+			Registrar.getSchoolSchedule(s);
+			copy.add(s);
+		}
+		creator= new GroupManager(copy, manager);
 	}
 	/**
 	 * @return the groupSize
@@ -127,5 +129,13 @@ public class GroupCreationSystem {
 	 */
 	public Collection<Student> getStudents(){
 		return allStudents;
+	}
+	
+	/****
+	 *Add a preference to the preference manager
+	 *****/
+	public void addPreference(Student s1, Student s2, int i) {
+		manager.specifyPreference(s1, s2, i);
+		
 	}
 }

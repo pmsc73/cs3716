@@ -19,6 +19,7 @@ import utility.StudentFileReader;
  *
  *****/
 public class PreferenceManagerTest {
+	
 	public static void main(String[] args){
 		StudentFileReader r = new StudentFileReader();
 		PreferenceManager manager=new PreferenceManager();
@@ -31,6 +32,14 @@ public class PreferenceManagerTest {
 		for(Preference p: manager.getInstructorDisallowed()){
 			System.out.println(p.getSource()+" can't work with "+p.getTarget());
 		}
+		System.out.println("The sets of disallowed students are:");
+		while(manager.hasDisallowedSets()){
+			Collection<Student> disallowed = manager.getDisallowedSet();
+		
+			for(Student s: disallowed) System.out.print(s+ ", ");
+			System.out.println("");
+		}
+		
 	}
 
 }

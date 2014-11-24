@@ -64,7 +64,7 @@ public class Student {
 		return schedule;
 	}
 	public String toString(){
-		String s = name+", "+id;
+		String s = name;
 		return s;
 	}
 	public boolean equals(Object o){
