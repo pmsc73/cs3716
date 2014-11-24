@@ -113,7 +113,7 @@ public class GroupProjectGUI extends JFrame {
 
 		JButton btnCreate = new JButton("CREATE");
 		btnCreate.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					groupSize = Integer.parseInt(txtSize.getText());
@@ -231,6 +231,22 @@ public class GroupProjectGUI extends JFrame {
 				// HERE WE ARE WAHOO
 				popupGroupModel.addElement("Unassigned");
 
+				DefaultComboBoxModel<String> moveGroupModel = new DefaultComboBoxModel<String>();
+
+				ArrayList<Group> moveGroupList = (ArrayList<Group>) cont
+						.getGroups();
+
+				for (int i = 0; i < moveGroupList.size(); i++) {
+					moveGroupModel.addElement(moveGroupList.get(i).getName());
+				}
+				moveGroupModel.addElement("Unassigned");
+
+				JComboBox cmbGroups = new JComboBox();
+				cmbGroups.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				cmbGroups.setModel(moveGroupModel);
+				cmbGroups.setBounds(442, 118, 89, 23);
+				contentPane.add(cmbGroups);
+
 				final JList<String> popupGroupList = new JList<String>(
 						popupGroupModel);
 				btnMove.addActionListener(new ActionListener() {
@@ -242,82 +258,100 @@ public class GroupProjectGUI extends JFrame {
 						if (selectedStudent == null) {
 						} else {
 
-							final JDialog popup = new JDialog();
-							popup.getContentPane().setLayout(new FlowLayout());
-							popup.setSize(400, 400);
+							final String targetGroup = (String) cmbGroups
+									.getSelectedItem();
+							Group fromGroup = cont
+									.getGroupByName(selectedGroup);
+							Group toGroup = cont.getGroupByName(targetGroup);
+							cont.removeStudent(
+									cont.getStudentByName(selectedStudent),
+									fromGroup);
+							if (!targetGroup.equals("Unassigned")) {
+								cont.addStudent(
+										cont.getStudentByName(selectedStudent),
+										toGroup);
+							}
 
-							final JPanel popupGroups = new JPanel();
-							JLabel overhead = new JLabel("Move "
-									+ selectedStudent + " Where?");
-							overhead.setBounds(0, 0, 109, 14);
-							popup.getContentPane().add(overhead);
-							popup.setSize(300, 300);
+							ArrayList<Student> students = new ArrayList<Student>();
 
-							JScrollPane groupsScroll = new JScrollPane();
-							groupsScroll.setViewportView(popupGroupList);
-							popupGroups.setBounds(0, 20, 200, 300);
-							popupGroups.add(groupsScroll);
-							popup.getContentPane().add(popupGroups);
-							JButton moveIt = new JButton("MOVE");
-							// PUT IN MOVING TO THE ABYSS
-							moveIt.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent e) {
-									// if from the unassigned list
-									String moveTo = popupGroupList
-											.getSelectedValue();
-									Student student = cont
-											.getStudentByName(selectedStudent);
-									if (selectedGroup == "Unassigned") {
-										if (moveTo == "Unassigned") {
-											// do nothing should change this
-										} else {
-											Group toGroup = cont
-													.getGroupByName(moveTo);
+							students = (ArrayList<Student>)fromGroup.getGroupMembers();
 
-											cont.addStudent(student, toGroup);
-										}
-									} else {
-										Group fromGroup = cont
-												.getGroupByName(selectedGroup);// HANDLE
-																				// IF
-																				// FROM
-																				// GROUP
-																				// IS
-																				// UNASSIGNED
-										// check if group is full
-										if (moveTo == "Unassigned") {
-											cont.removeStudent(student,
-													fromGroup);
-										} else {
-											Group toGroup = cont
-													.getGroupByName(moveTo);
+							for (Student student : students) {
+								System.out.println(student.getName());
+								lmModel.addElement(student.getName());
+							}
+							
 
-											cont.removeStudent(student,
-													fromGroup);
-											cont.addStudent(student, toGroup);
-											/*
-											 * This was here for testing, had a
-											 * problem tho, so ignoring for now
-											 * if(toGroup.isFull()) { JDialog
-											 * popup2 = new JDialog();
-											 * popup2.setSize(50,200);
-											 * popup2.add(new
-											 * JLabel("WARNING: "+toGroup.
-											 * getName
-											 * ()+" is full, moved anyways."));
-											 * popup2.setVisible(true); }
-											 */
-										}
-									}
-									System.out.println("here");
-									groupList.setSelectedValue(moveTo, true);
-									popup.setVisible(false);
-								}
-							});
+							/*
+							 * final JDialog popup = new JDialog();
+							 * popup.getContentPane().setLayout(new
+							 * FlowLayout()); popup.setSize(400, 400);
+							 * 
+							 * final JPanel popupGroups = new JPanel(); JLabel
+							 * overhead = new JLabel("Move " + selectedStudent +
+							 * " Where?"); overhead.setBounds(0, 0, 109, 14);
+							 * popup.getContentPane().add(overhead);
+							 * popup.setSize(300, 300);
+							 * 
+							 * JScrollPane groupsScroll = new JScrollPane();
+							 * groupsScroll.setViewportView(popupGroupList);
+							 * popupGroups.setBounds(0, 20, 200, 300);
+							 * popupGroups.add(groupsScroll);
+							 * popup.getContentPane().add(popupGroups);
+							 * 
+							 * JButton moveIt = new JButton("MOVE"); // PUT IN
+							 * MOVING TO THE ABYSS
+							 * 
+							 * 
+							 * moveIt.addActionListener(new ActionListener() {
+							 * public void actionPerformed(ActionEvent e) { //
+							 * if from the unassigned list String moveTo =
+							 * popupGroupList .getSelectedValue(); Student
+							 * student = cont
+							 * .getStudentByName(selectedStudent); if
+							 * (selectedGroup == "Unassigned") { if (moveTo ==
+							 * "Unassigned") { // do nothing should change this
+							 * } else { Group toGroup = cont
+							 * .getGroupByName(moveTo);
+							 * 
+							 * cont.addStudent(student, toGroup); } } else {
+							 * Group fromGroup = cont
+							 * .getGroupByName(selectedGroup);// HANDLE // IF //
+							 * FROM // GROUP // IS // UNASSIGNED // check if
+							 * group is full if (moveTo == "Unassigned") {
+							 * cont.removeStudent(student, fromGroup); } else {
+							 * Group toGroup = cont .getGroupByName(moveTo);
+							 * 
+							 * cont.removeStudent(student, fromGroup);
+							 * cont.addStudent(student, toGroup);
+							 */
 
-							moveIt.setBounds(100, 100, 120, 120);
-							popup.getContentPane().add(moveIt);
-							popup.setVisible(true);
+							/*
+							 * This was here for testing, had a problem tho, so
+							 * ignoring for now if(toGroup.isFull()) { JDialog
+							 * popup2 = new JDialog(); popup2.setSize(50,200);
+							 * popup2.add(new JLabel("WARNING: "+toGroup.
+							 * getName ()+" is full, moved anyways."));
+							 * popup2.setVisible(true); }
+							 */
+
+							/*
+							 * 
+							 * } }
+							 * 
+							 * 
+							 * 
+							 * System.out.println("here");
+							 * groupList.setSelectedValue(moveTo, true);
+							 * popup.setVisible(false);
+							 * 
+							 * } });
+							 * 
+							 * 
+							 * moveIt.setBounds(100, 100, 120, 120);
+							 * popup.getContentPane().add(moveIt);
+							 * popup.setVisible(true); }
+							 */
 						}
 					}
 				});
@@ -333,14 +367,6 @@ public class GroupProjectGUI extends JFrame {
 				membersLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				membersLabel.setBounds(176, 60, 117, 14);
 				contentPane.add(membersLabel);
-
-				JComboBox comboBox = new JComboBox();
-				comboBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				comboBox.setModel(new DefaultComboBoxModel(new String[] {
-						"Group 1", "Group 2", "Group 3", "Group 4",
-						"One Fiech", "Two Fiech", "Red Fiech", "Blue Fiech" }));
-				comboBox.setBounds(442, 118, 89, 23);
-				contentPane.add(comboBox);
 
 				SwingUtilities.updateComponentTreeUI(contentPane);
 			}
