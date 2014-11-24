@@ -217,9 +217,9 @@ public class GroupProjectGUI extends JFrame {
 				scrlMembers.setViewportView(lstMembers);
 				groupMembersPanel.add(scrlMembers);
 
-				JButton moveButton = new JButton("MOVE");
+				JButton btnMove = new JButton("MOVE");
 
-				moveButton.setBounds(335, 156, 89, 23);
+				btnMove.setBounds(442, 84, 89, 23);
 				// listener for move button, onclick it opens a popup window
 				// for the group to move the selected student into.
 				// remember to allow moving student to unassigned.
@@ -233,7 +233,7 @@ public class GroupProjectGUI extends JFrame {
 
 				final JList<String> popupGroupList = new JList<String>(
 						popupGroupModel);
-				moveButton.addActionListener(new ActionListener() {
+				btnMove.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						final String selectedGroup = groupList
 								.getSelectedValue();
@@ -322,7 +322,7 @@ public class GroupProjectGUI extends JFrame {
 					}
 				});
 
-				contentPane.add(moveButton);
+				contentPane.add(btnMove);
 
 				JLabel groupsLabel = new JLabel("Group List:");
 				groupsLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -333,11 +333,6 @@ public class GroupProjectGUI extends JFrame {
 				membersLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				membersLabel.setBounds(176, 60, 117, 14);
 				contentPane.add(membersLabel);
-
-				JButton btnMove = new JButton("MOVE");
-				btnMove.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				btnMove.setBounds(442, 84, 89, 23);
-				contentPane.add(btnMove);
 
 				JComboBox comboBox = new JComboBox();
 				comboBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
