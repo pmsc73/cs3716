@@ -38,14 +38,19 @@ public class StudentFileReader implements StudentReader {
 				line.useDelimiter(","); 
 				String name;
 				String number;
-				double gpa;
+				String gpa;
 				while(line.hasNext()) {
 					name = line.next();
 					if(line.hasNext()) {
 						number = line.next();
 						if(line.hasNextDouble()) {
-							gpa = line.nextDouble();
-							studentList.add(new Student(name,number,gpa));
+							gpa = line.next();
+							try {
+								studentList.add(new Student(name,number,Double.parseDouble(gpa)));
+							}
+							catch(NumberFormatException NaN) {
+								System.out.println("Not a double");
+							}
 						}
 					}
 					

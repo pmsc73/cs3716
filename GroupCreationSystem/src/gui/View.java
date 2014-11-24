@@ -21,14 +21,9 @@ public class View {
 	}
 	public static void main(String[] args) {
 		View view = new View();
-
-		sizeGui = new GroupSizeGUI(view.controller);
-		while(!(sizeGui.getStatus())) {
-			sizeGui.setVisible(true);
-		}
-		sizeGui.setVisible(false);
 		projGui = new GroupProjectGUI(view.controller);
 		projGui.setVisible(true);
+		
 	}
 
 }
