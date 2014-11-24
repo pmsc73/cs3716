@@ -27,6 +27,7 @@ import javax.swing.ListModel;
 import javax.swing.AbstractListModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -346,6 +347,7 @@ public class GroupProjectGUI extends JFrame {
 				comboBox.setBounds(442, 118, 89, 23);
 				contentPane.add(comboBox);
 
+				SwingUtilities.updateComponentTreeUI(contentPane);
 			}
 
 		});
