@@ -84,7 +84,7 @@ public class GroupProjectGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JPanel groupsPanel = new JPanel();
+		final JPanel groupsPanel = new JPanel();
 		groupsPanel.setBounds(10, 85, 109, 131);
 		contentPane.add(groupsPanel);
 		groupsPanel.setLayout(null);
