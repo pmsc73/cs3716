@@ -55,7 +55,7 @@ public class GroupProjectGUI extends JFrame {
 	 * Launch the GUI page.
 	 */
 	public void start() {
-		// controller=this.controller; //intializes variables
+		// controller=this.controller; //initializes variables
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
