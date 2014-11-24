@@ -43,7 +43,7 @@ public class StudentFileReader implements StudentReader {
 					name = line.next();
 					if(line.hasNext()) {
 						number = line.next();
-						if(line.hasNext()) {
+						if(line.hasNextDouble()) {
 							gpa = line.next();
 							try {
 								studentList.add(new Student(name,number,Double.parseDouble(gpa)));
