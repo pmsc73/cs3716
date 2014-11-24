@@ -113,7 +113,7 @@ public class GroupProjectGUI extends JFrame {
 
 		JButton btnCreate = new JButton("CREATE");
 		btnCreate.addActionListener(new ActionListener() {
-
+			
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					groupSize = Integer.parseInt(txtSize.getText());
