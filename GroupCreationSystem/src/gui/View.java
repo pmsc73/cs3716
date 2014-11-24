@@ -28,9 +28,7 @@ public class View {
 		}
 		sizeGui.setVisible(false);
 		projGui = new GroupProjectGUI(view.controller);
-
 		projGui.setVisible(true);
-				
 	}
 
 }
