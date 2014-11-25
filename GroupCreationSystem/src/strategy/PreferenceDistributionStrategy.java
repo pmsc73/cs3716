@@ -54,9 +54,10 @@ public class PreferenceDistributionStrategy implements CreateGroupStrategy{
 			split(manager.getDisallowedSet(),groups);
 				
 		}
-		//add all of the required groupings
+		//add all of the required groupings. Retry unadded students only once
 		while(manager.hasRequiredSets()){
-			groupAdd(manager.getAllowedSet(),groups);
+			Collection<Student>retry=groupAdd(manager.getRequiredSet(),groups);
+			if(retry.size()>0) groupAdd(retry,groups);
 		}
 		
 	}
@@ -67,22 +68,24 @@ public class PreferenceDistributionStrategy implements CreateGroupStrategy{
 	private void split(Collection<Student> students,Collection<Group> groups){
 		int size=students.size();
 		
-			Student s = students.iterator().next();
-			int i=0;
+		for(int i=0;i<size;i++){
+			int mostSpace=0; 
+			Group bestGroup=groups.iterator().next();
+			//find the group with the most space
+			Student stu = students.iterator().next();
 			for(Group g: groups){
-				if(!g.isFull()){
-					g.add(s);
-					students.remove(s);
-					unAddedStudents.remove(s);
-					i++;
-					if(i<size){
-						s=students.iterator().next();
-						
-					}
-					else break;
+				int space = g.getGroupCapacity()-g.getCurrentSize();
+				if(space>mostSpace){
+					mostSpace=space;
+					bestGroup=g;
 				}
-					
 			}
+			bestGroup.add(stu);
+			students.remove(stu);
+			unAddedStudents.remove(stu);
+			
+		}
+		
 		
 	}
 
@@ -90,31 +93,52 @@ public class PreferenceDistributionStrategy implements CreateGroupStrategy{
 	 * Method to add students together. If only some of the students can be added, the unadded students are returned so that the system can try to place them
 	 * together in a different group.
 	 ****/
-	private void groupAdd(Collection<Student> students, Collection<Group> groups){
+	private Collection<Student> groupAdd(Collection<Student> students, Collection<Group> groups){
 		int requiredSpace = students.size();
 		int bestFit=999999999;
-		Group bestGroup= groups.iterator().next();
+		Group bestGroup=groups.iterator().next();
+		boolean groupStarted=false;
 		for(Group g: groups){
-			//find the difference between the group's current capacity and the number of students which need to be added.
-			//This number needs to be minimized in order to put as many of these students together as possible.
-			int diff = Math.abs(g.getGroupCapacity()-g.getCurrentSize()-requiredSpace);
-			if (diff<bestFit){
-				bestFit=diff;
-				bestGroup=g;
+			for(Student s: students){
+				if(g.getGroupMembers().contains(s)){
+					students.remove(s);
+					bestGroup=g;
+					groupStarted=true;
+					break;
+				}
 			}
-			
+			if(groupStarted)break;
+		}
+		if(!groupStarted){
+			for(Group g: groups){
+				//find the difference between the group's current capacity and the number of students which need to be added.
+				//This number needs to be minimized in order to put as many of these students together as possible.
+				int diff = g.getGroupCapacity()-g.getCurrentSize()-requiredSpace;
+				if(diff==0){
+					bestGroup=g;
+					break;
+				}
+				else{
+					if((diff>0&&bestFit<0)||(diff>0&&bestFit>0&&diff<bestFit)||(diff<0&&bestFit<diff)){
+						bestFit=diff;
+						bestGroup=g;
+					}
+				}
+				
+			}
 		}
 		ArrayList<Student> unadded = new ArrayList<Student>();
 		
 		for(Student s: students){
 			if(!bestGroup.isFull()){
 				bestGroup.add(s);
+				unAddedStudents.remove(s);
 			}
 			else{
 				unadded.add(s);
 			}
 		}
-		groupAdd(unadded,groups);
+		return unadded;
 		
 	}
 }

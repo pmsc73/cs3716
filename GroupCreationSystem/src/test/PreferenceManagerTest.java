@@ -39,6 +39,19 @@ public class PreferenceManagerTest {
 			for(Student s: disallowed) System.out.print(s+ ", ");
 			System.out.println("");
 		}
+		for (int i=0;i<3;i++){
+			manager.specifyPreference(students.get(rand.nextInt(size)),students.get(rand.nextInt(size)), 1);
+		}
+		for(Preference p: manager.getInstructorPreferences()){
+			System.out.println(p.getSource()+" must work with "+p.getTarget());
+		}
+		System.out.println("The sets of required students are:");
+		while(manager.hasRequiredSets()){
+			Collection<Student> req = manager.getRequiredSet();
+		
+			for(Student s: req) System.out.print(s+ ", ");
+			System.out.println("");
+		}
 		
 	}
 

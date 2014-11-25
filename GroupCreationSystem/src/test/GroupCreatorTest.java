@@ -29,10 +29,53 @@ public class GroupCreatorTest {
 		controllerTest();
 		System.out.println("Controller Reset Test\n____________________________________");
 		controllerResetTest();
-		System.out.println("Creation Test, negative preferences only\n____________________________________");
-		negativePreferenceCreation();
-		System.out.println("Creation Test, postive preferences only\n____________________________________");
-		positivePreferenceCreation();
+		System.out.println("Creation Test with group size 3, negative preferences only\n____________________________________");
+		negativePreferenceCreation(3);
+		System.out.println("Creation Test with group size 4, negative preferences only\n____________________________________");
+		negativePreferenceCreation(4);
+		System.out.println("Creation Test with group size 5, negative preferences only\n____________________________________");
+		negativePreferenceCreation(5);
+		System.out.println("Creation Test with group size 2, postive preferences only\n____________________________________");
+		positivePreferenceCreation(2);
+		System.out.println("Creation Test with group size 4, postive preferences only\n____________________________________");
+		positivePreferenceCreation(4);
+		System.out.println("Creation Test with group size 5, postive preferences only\n____________________________________");
+		positivePreferenceCreation(5);
+		System.out.println("Creation Test with group size 4, random preferences\n____________________________________");
+		mixedPreferenceCreation(4);
+	}
+	/****
+	 * Method to test that students are properly added to groups when a variety of preferences have been specified
+	 * 
+	 ****/
+	private static void mixedPreferenceCreation(int groupSize) {
+		Controller control = new Controller();
+		control.setGroupSize(groupSize);
+		control.setCourseNumber("cs3716");
+		control.finalizeParameters();
+		ArrayList<Student> students =(ArrayList<Student>)control.getAllStudents();
+		Random r= new Random();
+		int size =control.getAllStudents().size();
+		for (int i=0;i<groupSize*2;i++){
+			Student s1=students.get(r.nextInt(size));
+			Student s2=students.get(r.nextInt(size));
+			if(i%2!=0){
+				System.out.println(s1+" cant work with "+s2);
+				control.addPreference(s1,s2, false);
+			}
+			else{
+				System.out.println(s1+" must work with "+ s2);
+				control.addPreference(s1, s2, true);
+			}
+		}
+		control.generateGroups();
+		Collection<Group> groups = control.getGroups();
+		System.out.println("Generated these groups:\n______________________");
+		for(Group g: groups){
+			g.printGroup();
+		
+		}
+		
 	}
 	/****
 	 * A test to make sure that you can regenerate the groups with a different size
@@ -133,9 +176,9 @@ public class GroupCreatorTest {
 	/****
 	 * Method to test that group creation works with preferences
 	 *****/
-	public static void negativePreferenceCreation(){
+	public static void negativePreferenceCreation(int groupSize){
 		Controller control = new Controller();
-		control.setGroupSize(3);
+		control.setGroupSize(groupSize);
 		control.setCourseNumber("cs3716");
 		control.finalizeParameters();
 		ArrayList<Student> students =(ArrayList<Student>)control.getAllStudents();
@@ -156,15 +199,15 @@ public class GroupCreatorTest {
 		}
 		
 	}
-	public static void positivePreferenceCreation(){
+	public static void positivePreferenceCreation(int groupSize){
 		Controller control = new Controller();
-		control.setGroupSize(3);
+		control.setGroupSize(groupSize);
 		control.setCourseNumber("cs3716");
 		control.finalizeParameters();
 		ArrayList<Student> students =(ArrayList<Student>)control.getAllStudents();
 		Random r= new Random();
 		int size =control.getAllStudents().size();
-		for (int i=0;i<3;i++){
+		for (int i=0;i<groupSize+2;i++){
 			Student s1=students.get(r.nextInt(size));
 			Student s2=students.get(r.nextInt(size));
 			System.out.println(s1+" must work with "+s2);

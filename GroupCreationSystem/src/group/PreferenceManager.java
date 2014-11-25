@@ -28,25 +28,22 @@ public class PreferenceManager {
 	 ****/
 	public Collection<Student> getDisallowedSet(){
 		Preference p;
-		ArrayList<Student> students= new ArrayList<Student>();
+		ArrayList<Student> students = new ArrayList<Student>();
 		if(disallowedGroups.size()>0){
 			p=disallowedGroups.iterator().next();
 			students.add(p.getSource());
 			students.add(p.getTarget());
 			disallowedGroups.remove(p);
-			ArrayList<Preference> usedPreferences = new ArrayList<Preference>();
-			for(Preference x: disallowedGroups){
-
-				ArrayList<Student> newStudents = new ArrayList<Student>();
-				for(Student s: students){
-					if(x.involves(s)){
-						newStudents.add(x.getPartner(s));
+			ArrayList<Preference> usedPreferences= new ArrayList<Preference>();
+			for(int i=0;i<students.size();i++){
+				for(Preference x: disallowedGroups){
+					if(x.involves(students.get(i))){
 						usedPreferences.add(x);
+						students.add(x.getPartner(students.get(i)));
 					}
 				}
-				for(Student s: newStudents) students.add(s);
+				for(Preference x: usedPreferences)disallowedGroups.remove(x);
 			}
-			for(Preference x: usedPreferences)disallowedGroups.remove(x);
 			return students;
 		}
 		
@@ -56,27 +53,29 @@ public class PreferenceManager {
 	 * Method to get a grouping of students which must work together. Note that
 	 * the group is removed from the PreferenceManager when this method is called.
 	 ****/
-	public Collection<Student> getAllowedSet(){
+	public Collection<Student> getRequiredSet(){
 		Preference p;
-		ArrayList<Student> students= new ArrayList<Student>();
+		ArrayList<Student> students = new ArrayList<Student>();
 		if(requiredGroups.size()>0){
+			int index =0;
 			p=requiredGroups.iterator().next();
 			students.add(p.getSource());
 			students.add(p.getTarget());
-			ArrayList<Preference> usedPreferences = new ArrayList<Preference>();
-			for(Preference x: requiredGroups){
-				ArrayList<Student> newStudents = new ArrayList<Student>();
-				for(Student s: students){
-					if(x.involves(s)) newStudents.add(x.getPartner(s));
-					usedPreferences.add(x);
+			requiredGroups.remove(p);
+			ArrayList<Preference> usedPreferences= new ArrayList<Preference>();
+			for(int i=0;i<students.size();i++){
+				for(Preference x: requiredGroups){
+					if(x.involves(students.get(i))){
+						usedPreferences.add(x);
+						students.add(x.getPartner(students.get(i)));
+					}
 				}
-				for(Student s: newStudents) students.add(s);
+				for(Preference x: usedPreferences)requiredGroups.remove(x);
 			}
-			for(Preference x: usedPreferences)disallowedGroups.remove(x);
 			return students;
+			
 		}
-		
-		else return null;	
+		else return null;
 	}
 	
 	public boolean hasDisallowedSets(){
@@ -86,6 +85,7 @@ public class PreferenceManager {
 		return requiredGroups.size()>0;
 	}
 	public void specifyPreference(Student s1, Student s2, int pref){
+		if(s1.equals(s2))return;
 		if(pref==1){
 			requiredGroups.add(new Preference(s1, s2, pref));
 		}
