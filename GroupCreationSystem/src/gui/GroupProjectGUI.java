@@ -220,16 +220,6 @@ public class GroupProjectGUI extends JFrame {
 				JButton btnMove = new JButton("MOVE");
 
 				btnMove.setBounds(442, 84, 89, 23);
-				// listener for move button, onclick it opens a popup window
-				// for the group to move the selected student into.
-				// remember to allow moving student to unassigned.
-				DefaultListModel<String> popupGroupModel = new DefaultListModel<String>();
-				for (Group group : groups) {
-					popupGroupModel.addElement(group.getName());
-					// the model gets each group name added
-				}
-				// HERE WE ARE WAHOO
-				popupGroupModel.addElement("Unassigned");
 
 				DefaultComboBoxModel<String> moveGroupModel = new DefaultComboBoxModel<String>();
 
@@ -247,8 +237,6 @@ public class GroupProjectGUI extends JFrame {
 				cmbGroups.setBounds(442, 118, 89, 23);
 				contentPane.add(cmbGroups);
 
-				final JList<String> popupGroupList = new JList<String>(
-						popupGroupModel);
 				btnMove.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						final String selectedGroup = groupList
@@ -274,84 +262,13 @@ public class GroupProjectGUI extends JFrame {
 
 							ArrayList<Student> students = new ArrayList<Student>();
 
-							students = (ArrayList<Student>)fromGroup.getGroupMembers();
+							students = (ArrayList<Student>) fromGroup
+									.getGroupMembers();
 
 							for (Student student : students) {
 								System.out.println(student.getName());
 								lmModel.addElement(student.getName());
 							}
-							
-
-							/*
-							 * final JDialog popup = new JDialog();
-							 * popup.getContentPane().setLayout(new
-							 * FlowLayout()); popup.setSize(400, 400);
-							 * 
-							 * final JPanel popupGroups = new JPanel(); JLabel
-							 * overhead = new JLabel("Move " + selectedStudent +
-							 * " Where?"); overhead.setBounds(0, 0, 109, 14);
-							 * popup.getContentPane().add(overhead);
-							 * popup.setSize(300, 300);
-							 * 
-							 * JScrollPane groupsScroll = new JScrollPane();
-							 * groupsScroll.setViewportView(popupGroupList);
-							 * popupGroups.setBounds(0, 20, 200, 300);
-							 * popupGroups.add(groupsScroll);
-							 * popup.getContentPane().add(popupGroups);
-							 * 
-							 * JButton moveIt = new JButton("MOVE"); // PUT IN
-							 * MOVING TO THE ABYSS
-							 * 
-							 * 
-							 * moveIt.addActionListener(new ActionListener() {
-							 * public void actionPerformed(ActionEvent e) { //
-							 * if from the unassigned list String moveTo =
-							 * popupGroupList .getSelectedValue(); Student
-							 * student = cont
-							 * .getStudentByName(selectedStudent); if
-							 * (selectedGroup == "Unassigned") { if (moveTo ==
-							 * "Unassigned") { // do nothing should change this
-							 * } else { Group toGroup = cont
-							 * .getGroupByName(moveTo);
-							 * 
-							 * cont.addStudent(student, toGroup); } } else {
-							 * Group fromGroup = cont
-							 * .getGroupByName(selectedGroup);// HANDLE // IF //
-							 * FROM // GROUP // IS // UNASSIGNED // check if
-							 * group is full if (moveTo == "Unassigned") {
-							 * cont.removeStudent(student, fromGroup); } else {
-							 * Group toGroup = cont .getGroupByName(moveTo);
-							 * 
-							 * cont.removeStudent(student, fromGroup);
-							 * cont.addStudent(student, toGroup);
-							 */
-
-							/*
-							 * This was here for testing, had a problem tho, so
-							 * ignoring for now if(toGroup.isFull()) { JDialog
-							 * popup2 = new JDialog(); popup2.setSize(50,200);
-							 * popup2.add(new JLabel("WARNING: "+toGroup.
-							 * getName ()+" is full, moved anyways."));
-							 * popup2.setVisible(true); }
-							 */
-
-							/*
-							 * 
-							 * } }
-							 * 
-							 * 
-							 * 
-							 * System.out.println("here");
-							 * groupList.setSelectedValue(moveTo, true);
-							 * popup.setVisible(false);
-							 * 
-							 * } });
-							 * 
-							 * 
-							 * moveIt.setBounds(100, 100, 120, 120);
-							 * popup.getContentPane().add(moveIt);
-							 * popup.setVisible(true); }
-							 */
 						}
 					}
 				});
