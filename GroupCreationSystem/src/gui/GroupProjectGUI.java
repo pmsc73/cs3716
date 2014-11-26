@@ -142,6 +142,8 @@ public class GroupProjectGUI extends JFrame {
 				// list of all groups from controller
 
 				for (Group group : groups) {
+					System.out.println("******#*#*#*#*#*#********");
+					group.printGroup();
 					groupModel.addElement(group.getName());
 					// the model gets each group name added
 				}
@@ -167,7 +169,10 @@ public class GroupProjectGUI extends JFrame {
 				// lmModel is like groupModel but for the GROUP MEMBER LIST
 				final JList<String> lstMembers = new JList<String>(lmModel);
 				// lstMembers is the JList who gets to hold lmModel
-
+				for (Group g : groups) {
+					g.printGroup();
+					System.out.println("%%%%%%........%%%%%");
+				}
 				groupList.addListSelectionListener(new ListSelectionListener() {
 					public void valueChanged(ListSelectionEvent e) {
 						for (Group group : groups) {

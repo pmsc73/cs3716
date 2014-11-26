@@ -11,7 +11,6 @@ import java.util.Collection;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 /****
  * Controller class which contains all of the methods that the GUI might need. Responsible for
  * delegating work to other classes.
