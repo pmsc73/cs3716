@@ -116,7 +116,12 @@ public class GroupProjectGUI extends JFrame {
 
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					groupSize = Integer.parseInt(txtSize.getText());
+					int size = Integer.parseInt(txtSize.getText());
+					if (size > 0) {
+						groupSize = size;
+					} else {
+						throw new NumberFormatException();
+					}
 				} catch (NumberFormatException NaN) {
 					txtSize.setText("Try again");
 					return;
