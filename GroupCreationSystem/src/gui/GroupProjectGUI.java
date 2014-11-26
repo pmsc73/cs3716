@@ -111,6 +111,9 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(txtSize);
 		txtSize.setColumns(10);
 
+		DefaultListModel<String> groupModel = new DefaultListModel<String>();
+		// groupModel is a list of the group names, effectively
+
 		JButton btnCreate = new JButton("CREATE");
 		btnCreate.addActionListener(new ActionListener() {
 
@@ -135,8 +138,6 @@ public class GroupProjectGUI extends JFrame {
 				cont.finalizeParameters();
 
 				cont.generateGroups(); // makes the groups in the controller
-				DefaultListModel<String> groupModel = new DefaultListModel<String>();
-				// groupModel is a list of the group names, effectively
 
 				final Collection<Group> groups = cont.getGroups();
 				// list of all groups from controller
@@ -149,7 +150,7 @@ public class GroupProjectGUI extends JFrame {
 				}
 				groupModel.addElement("Unassigned");
 
-				final JList<String> groupList = new JList<String>(groupModel);
+				JList<String> groupList = new JList<String>(groupModel);
 				// groupList is a list who implements the model
 				groupList.setBounds(0, 0, 109, 230);
 				groupList.setBorder(null);
