@@ -11,7 +11,7 @@ import schedule.Schedule;
  * @author Emily, Philip
  *
  ****/
-public class Student {
+public class Student implements Comparable<Student>{
 	private String name;
 	private String id;
 	private double gpa;
@@ -26,7 +26,9 @@ public class Student {
 		this.gpa=gpa;
 	}
 	
-
+	public int compareTo(Student other) {
+		return (this.gpa > other.gpa) ? 1 : (this.gpa == other.gpa) ? 0 : -1;
+	}
 	
 	public void answerQuestion(int questionNumber){
 		
