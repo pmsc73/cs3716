@@ -94,6 +94,16 @@ public class PreferenceManager {
 		}
 		hasPreferences=true;
 	}
+	public void removePreference(Student s1, Student s2, int pref){
+		if(s1.equals(s2))return;
+		if(pref==1){
+			requiredGroups.remove(new Preference(s1, s2, pref));
+		}
+		if(pref==-1){
+			disallowedGroups.remove(new Preference(s1,s2,pref));
+		}
+		if(disallowedGroups.size()==0&&requiredGroups.size()==0)hasPreferences=false;
+	}
 	public boolean hasPreferences(){
 		return hasPreferences;
 	}

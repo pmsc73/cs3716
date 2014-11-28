@@ -7,7 +7,6 @@ import java.util.Collection;
 import utility.Group;
 import utility.Student;
 import group.CreateGroupStrategy;
-import group.Preference;
 import group.PreferenceManager;
 
 /****
@@ -71,18 +70,21 @@ public class PreferenceDistributionStrategy implements CreateGroupStrategy{
 		for(int i=0;i<size;i++){
 			int mostSpace=0; 
 			Group bestGroup=groups.iterator().next();
-			//find the group with the most space
 			Student stu = students.iterator().next();
-			for(Group g: groups){
-				int space = g.getGroupCapacity()-g.getCurrentSize();
-				if(space>mostSpace){
-					mostSpace=space;
-					bestGroup=g;
+			//find the group to put the student in
+			if(unAddedStudents.contains(stu)){
+				for(Group g: groups){
+					int space = g.getGroupCapacity()-g.getCurrentSize();
+					if(space>mostSpace){
+						mostSpace=space;
+						bestGroup=g;
+					}
 				}
+				bestGroup.add(stu);
+				unAddedStudents.remove(stu);
 			}
-			bestGroup.add(stu);
+
 			students.remove(stu);
-			unAddedStudents.remove(stu);
 			
 		}
 		

@@ -106,7 +106,7 @@ public class GroupProjectGUI extends JFrame {
 		/*
 		 * This panel is used in the instructor's preference input!
 		 */
-		JPanel preferencesPanel = new JPanel();
+		final JPanel preferencesPanel = new JPanel();
 		preferencesPanel.setBounds(10, 33, 500, 206);
 		contentPane.add(preferencesPanel);
 		preferencesPanel.setLayout(new BorderLayout());
@@ -161,7 +161,7 @@ public class GroupProjectGUI extends JFrame {
 				cont.setGroupSize(groupSize);
 				
 				StudentListPanel lstStuLeft = new StudentListPanel(controller);
-				StudentListPanel lstStuRight = new StudentListPanel(controller);
+				final StudentListPanel lstStuRight = new StudentListPanel(controller);
 				JPanel prefCenter = new JPanel(new GridLayout(1,2));
 				
 				prefCenter.add(lstStuLeft);

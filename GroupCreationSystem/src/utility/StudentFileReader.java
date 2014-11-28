@@ -19,12 +19,12 @@ import java.io.FileNotFoundException;
 public class StudentFileReader implements StudentReader {
 	
 	public Collection<Student> getList(String path) {
-		/**
+		/****
 		 * Only method that actually gets used in the class. Is full
 		 * class functionality.
 		 * @param path: path to file with list in it
 		 * @return studentList 
-		 */
+		 ****/
 		Collection<Student> studentList = new ArrayList<Student>();
 		try { // needs to be in try block because Scanner throws FileNotFound
 			
@@ -64,5 +64,25 @@ public class StudentFileReader implements StudentReader {
 			System.exit(1);
 		}
 		return studentList;
+	}
+	public Collection<String>  getCourses(){
+		File folder = new File(System.getProperty("user.dir")+"/src/test/");
+		File[] listOfFiles = folder.listFiles();
+		ArrayList<String> files=new ArrayList<String>();
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		    	  if(listOfFiles[i].getName().contains(".dat")){
+		    		  
+		    		  files.add(listOfFiles[i].getName().replace(".dat", ""));
+		    	  }
+		    	  
+		      }
+		    }
+		    return files;
+	}
+	public static void main(String[] args){
+		StudentFileReader r=new StudentFileReader();
+		Collection<String> courses=r.getCourses();
+		for(String s: courses) System.out.println(s);
 	}
 }
