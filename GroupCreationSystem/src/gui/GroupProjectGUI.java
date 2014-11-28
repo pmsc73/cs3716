@@ -175,15 +175,17 @@ public class GroupProjectGUI extends JFrame {
 				prefSouth.add(btnDisallow);
 				prefSouth.add(btnCreate);
 				preferencesPanel.add(prefSouth,BorderLayout.SOUTH);
-				Student s1 = lstStuLeft.getSelectedStudent();
-				Student s2 = lstStuRight.getSelectedStudent();
 				btnForce.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Student s1 = lstStuLeft.getSelectedStudent();
+						Student s2 = lstStuRight.getSelectedStudent();
 						cont.addPreference(s1,s2,true);
 					}
 				});
 				btnDisallow.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Student s1 = lstStuLeft.getSelectedStudent();
+						Student s2 = lstStuRight.getSelectedStudent();
 						cont.addPreference(s1,s2,false);
 					}
 				});
