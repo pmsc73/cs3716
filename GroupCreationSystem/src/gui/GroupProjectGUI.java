@@ -101,7 +101,7 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(txtCourse);
 		txtCourse.setColumns(10);
 
-		JLabel lblCourseName = new JLabel("Course name:");
+		JLabel courseNameLabel = new JLabel("Course name:");
 
 		/*
 		 * This panel is used in the instructor's preference input!
@@ -114,14 +114,15 @@ public class GroupProjectGUI extends JFrame {
 		/*
 		 * This panel is used to show and move members in groups
 		 */
+		
 		final JPanel groupsPanel = new JPanel();
 		groupsPanel.setBounds(10, 265, 500, 147);
 		contentPane.add(groupsPanel);
 		groupsPanel.setLayout(null);		
 						 		
-		lblCourseName.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblCourseName.setBounds(10, 14, 86, 14);
-		contentPane.add(lblCourseName);
+		courseNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		courseNameLabel.setBounds(10, 14, 86, 14);
+		contentPane.add(courseNameLabel);
 
 		JLabel lblGroupSize = new JLabel("Group size:");
 		lblGroupSize.setFont(new Font("Tahoma", Font.PLAIN, 12));
