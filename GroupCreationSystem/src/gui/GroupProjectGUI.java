@@ -169,14 +169,14 @@ public class GroupProjectGUI extends JFrame {
 				preferencesPanel.add(prefCenter,BorderLayout.CENTER);
 				preferencesPanel.add(new JLabel("Pick two students for instructor preferences"),BorderLayout.NORTH);
 				JPanel prefSouth = new JPanel(new FlowLayout(FlowLayout.CENTER,32,5));
-				JButton forceButton = new JButton("Force");
+				JButton btnForce = new JButton("Force");
 				JButton btnDisallow = new JButton("Disallow");
 				JButton btnCreate = new JButton("Create");
-				prefSouth.add(forceButton);
+				prefSouth.add(btnForce);
 				prefSouth.add(btnDisallow);
 				prefSouth.add(btnCreate);
 				preferencesPanel.add(prefSouth,BorderLayout.SOUTH);
-				forceButton.addActionListener(new ActionListener() {
+				btnForce.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Student s1 = lstStuLeft.getSelectedStudent();
 						Student s2 = lstStuRight.getSelectedStudent();
@@ -192,6 +192,9 @@ public class GroupProjectGUI extends JFrame {
 				});
 				btnCreate.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						btnCreate.setEnabled(false);
+						btnDisallow.setEnabled(false);
+						btnForce.setEnabled(false);
 						cont.finalizeParameters();
 						cont.generateGroups(); // makes the groups in the controller
 		

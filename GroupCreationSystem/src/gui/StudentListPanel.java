@@ -42,6 +42,10 @@ public class StudentListPanel extends JPanel {
 		count++;
 	}
 	
+	public Student getSelectedStudent() {
+		return cont.getStudentByName(lstStudents.getSelectedValue());
+	}
+	
 	/*
 	 * The following methods are overrides from the JPanel methods
 	 * They are overridden because the sizing would not work properly
@@ -49,11 +53,6 @@ public class StudentListPanel extends JPanel {
 	 * 
 	 * @author pmsc73
 	 */
-	
-	public Student getSelectedStudent() {
-		return cont.getStudentByName(lstStudents.getSelectedValue());
-	}
-	
 	public Dimension getPreferredSize() {
 		return new Dimension(WIDTH,HEIGHT);
 	}

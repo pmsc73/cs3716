@@ -25,13 +25,6 @@ public class Controller {
 		sys=new GroupCreationSystem();
 	}
 	
-	public void preferencesSet() {
-		sys.preferencesSet();
-	}
-	public boolean isPrefsSet() {
-		return sys.isPrefsSet();
-	}
-	
 	public void setCourseNumber(String num){
 		sys.setCourseNumber(num);
 	}
