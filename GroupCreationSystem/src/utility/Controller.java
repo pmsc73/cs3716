@@ -11,7 +11,6 @@ import java.util.Collection;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 /****
  * Controller class which contains all of the methods that the GUI might need. Responsible for
  * delegating work to other classes.
@@ -24,6 +23,13 @@ public class Controller {
 	
 	public Controller(){
 		sys=new GroupCreationSystem();
+	}
+	
+	public void preferencesSet() {
+		sys.preferencesSet();
+	}
+	public boolean isPrefsSet() {
+		return sys.isPrefsSet();
 	}
 	
 	public void setCourseNumber(String num){
