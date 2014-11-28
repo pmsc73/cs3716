@@ -8,7 +8,7 @@ import utility.Registrar;
 import utility.Student;
 /****
  * Class to represent our group creation system
- * @author Emily
+ * @author Emily, Philip
  *
  ****/
 public class GroupCreationSystem {
@@ -16,6 +16,7 @@ public class GroupCreationSystem {
 	private String courseNumber;
 	private int groupSize;
 	private boolean skillBased;
+	boolean prefsSet = false;
 	private double deadline;
 	private String instructor;
 	private GroupManager creator;
@@ -137,5 +138,11 @@ public class GroupCreationSystem {
 	public void addPreference(Student s1, Student s2, int i) {
 		manager.specifyPreference(s1, s2, i);
 		
+	}
+	public void preferencesSet() {
+		prefsSet = true;
+	}
+	public boolean isPrefsSet() {
+		return prefsSet;
 	}
 }
