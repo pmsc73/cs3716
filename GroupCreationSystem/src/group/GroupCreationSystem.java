@@ -8,7 +8,7 @@ import utility.Registrar;
 import utility.Student;
 /****
  * Class to represent our group creation system
- * @author Emily
+ * @author Emily, Philip
  *
  ****/
 public class GroupCreationSystem {

@@ -152,4 +152,11 @@ public class Controller {
 		else sys.addPreference(s1,s2,-1);
 		
 	}
+	/****
+	 * Method to get the names of courses for which there are files.
+	 ****/
+	public Collection<String> getCourses(){
+		StudentFileReader r = new StudentFileReader();
+		return r.getCourses();
+	}
 }
