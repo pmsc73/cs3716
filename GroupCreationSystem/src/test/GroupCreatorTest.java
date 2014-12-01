@@ -8,7 +8,7 @@ import utility.Controller;
 import utility.Group;
 import utility.Student;
 import utility.StudentFileReader;
-import group.GroupCreationSystem;
+import group.Controller;
 import group.GroupManager;
 import group.Preference;
 import group.PreferenceManager;
