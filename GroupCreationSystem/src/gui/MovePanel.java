@@ -196,6 +196,8 @@ public class MovePanel extends JPanel {
 					//group to move student into
 					final String targetGroup = (String) cmbMoveGroupList
 							.getSelectedItem();
+					final int index1 = cmbMoveGroupList.getSelectedIndex();
+					final int index2 = lstGroups.getSelectedIndex();
 					//group moving student out of
 					Group fromGroup = cont.getGroupByName(selectedGroup);
 					Group toGroup = cont.getGroupByName(targetGroup);
@@ -215,6 +217,12 @@ public class MovePanel extends JPanel {
 						System.out.println(student.getName());
 						lmModel.addElement(student.getName());
 					}
+					if (index1==index2){
+						lstGroups.setSelectedIndex(0);//HERE
+						lstGroups.setSelectedIndex(index2);
+					}
+					lstGroups.setSelectedIndex(index1);//HERE
+					lstGroups.setSelectedIndex(index2);
 				}
 			}
 		});
