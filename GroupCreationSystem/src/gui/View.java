@@ -23,10 +23,6 @@ public class View extends JFrame{
 
 	public View() {
 		Controller controller = new Controller();
-		controller.setCourseNumber("cs3716");
-		controller.setGroupSize(3);
-		controller.finalizeParameters();
-		controller.generateGroups();
 		//projGui = new GroupProjectGUI(view.controller);
 		//projGui.setVisible(true);
 
@@ -50,21 +46,29 @@ public class View extends JFrame{
 		
 		init.addNextListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.finalizeParameters();
+				setTitle("Group Creation System - "+controller.getCourseNumber());
 				if(!controller.getSkillBased()) {
+					pref.start();
 					frameCards.show(panels,"pref");
 				}
 				else {
+					controller.generateGroups();
+					move.start();
 					frameCards.show(panels,"move");
 				}
 			}
 		});
 		pref.addNextListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.generateGroups();
+				move.start();
 				frameCards.show(panels,"move");
 			}
 		});
 		move.addNextListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				show.start();
 				frameCards.show(panels,"show");
 			}
 		});

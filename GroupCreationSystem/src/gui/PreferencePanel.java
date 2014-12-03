@@ -43,7 +43,7 @@ public class PreferencePanel extends JPanel {
 	private JLabel lblSetPrefs;
 	
 	private JButton btnAddPref;
-	private JButton btnNext;
+	private JButton btnNext=new JButton();
 	
 	private boolean done=false;
 	
@@ -78,7 +78,8 @@ public class PreferencePanel extends JPanel {
 		this.controller = controller;
 		setPreferredSize(new Dimension(WINDOW_WIDTH,WINDOW_HEIGHT));
 		setBounds(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
-		
+	}
+	public void start() {
 		lblCourseName = new JLabel(controller.getCourseNumber());
 		lblPreferences = new JLabel("Select students who should/shouldn't work together from list");
 		lblSetPrefs = new JLabel("Your preferences:");
@@ -97,7 +98,7 @@ public class PreferencePanel extends JPanel {
 		mdlPreference.addElement("must work together");
 		mdlPreference.addElement("cannot work together");
 		cmbPreference = new JComboBox<String>(mdlPreference);
-		btnNext = new JButton("Next");
+		btnNext.setText("Next");
 		
 		btnAddPref = new JButton("Confirm");
 		btnAddPref.addActionListener(new ActionListener() {

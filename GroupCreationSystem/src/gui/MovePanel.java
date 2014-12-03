@@ -31,7 +31,7 @@ import utility.Student;
  */
 public class MovePanel extends JPanel {
 	private Controller cont;
-	private JButton btnFinalize;
+	private JButton btnFinalize=new JButton();
 	private boolean done = false;
 	/**
 	 * Create the panel.
@@ -43,7 +43,8 @@ public class MovePanel extends JPanel {
 
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
-
+	}
+	public void start() {
 		// Panel that holds the group list
 		JPanel pnlGroups = new JPanel();
 		pnlGroups.setBounds(10, 76, 92, 201);
@@ -219,7 +220,7 @@ public class MovePanel extends JPanel {
 		});
 		this.add(btnMove);
 
-		btnFinalize = new JButton("FINALIZE");
+		btnFinalize.setText("FINALIZE");
 		
 		btnFinalize.setBounds(340, 292, 89, 23);
 		this.add(btnFinalize);

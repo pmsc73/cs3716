@@ -21,6 +21,8 @@ public class ShowGroupsPanel extends JPanel {
 	public ShowGroupsPanel(Controller controller){
 		this.controller = controller;
 		this.setLayout(new BorderLayout());
+	}
+	public void start() {
 		add(new JLabel("Final groups:"),BorderLayout.NORTH);
 		txtGroups = new JTextArea();
 		txtGroups.setEditable(false);
@@ -29,7 +31,7 @@ public class ShowGroupsPanel extends JPanel {
 		for(Group group : controller.getGroups()) {
 			String groupString = group.getName();
 			for(Student student : group.getGroupMembers()) {
-				groupString+="\n\t-" + student.getName();
+				groupString+="\n     -" + student.getName();
 			}
 			txtGroups.append(groupString+"\n-----------------\n");
 		}

@@ -58,6 +58,7 @@ public class InitPanel extends JPanel {
 		cmbCourses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String course = (String)cmbCourses.getSelectedItem();
+				controller.setCourseNumber(course);
 				if(course==null) {
 					course="";
 				}
@@ -72,6 +73,11 @@ public class InitPanel extends JPanel {
 			mdlGroupSize.addElement(Integer.toString(i));
 		}
 		cmbGroupSize = new JComboBox<String>(mdlGroupSize);
+		cmbGroupSize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.setGroupSize(Integer.parseInt((String)cmbGroupSize.getSelectedItem()));
+			}
+		});
 		p.add(cmbGroupSize);
 		add(p);
 		radGPASort = new JRadioButton("Sort by GPA");
