@@ -46,6 +46,7 @@ public class InitPanel extends JPanel {
 		JPanel p = new JPanel(leftFlow);
 		p.add(new JLabel("Course name:"));
 		cmbCourses = new JComboBox<String>(mdlCourses);
+		controller.setCourseNumber((String)cmbCourses.getSelectedItem());
 		p.add(cmbCourses);
 		add(p);
 		String course = (String)cmbCourses.getSelectedItem();
@@ -73,6 +74,7 @@ public class InitPanel extends JPanel {
 			mdlGroupSize.addElement(Integer.toString(i));
 		}
 		cmbGroupSize = new JComboBox<String>(mdlGroupSize);
+		controller.setGroupSize(Integer.parseInt((String)cmbGroupSize.getSelectedItem()));
 		cmbGroupSize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.setGroupSize(Integer.parseInt((String)cmbGroupSize.getSelectedItem()));
