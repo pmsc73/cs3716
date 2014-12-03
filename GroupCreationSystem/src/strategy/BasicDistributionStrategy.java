@@ -1,6 +1,7 @@
 package strategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Collection;
 import java.util.Random;
@@ -31,11 +32,7 @@ public class BasicDistributionStrategy implements CreateGroupStrategy {
 		ArrayList<Student> addedStudents = new ArrayList<Student>();
 
 		ArrayList<Student> sortedStudents = ((ArrayList<Student>) unAddedStudents);
-		sortedStudents.sort(new Comparator<Student>() {
-			public int compare(Student s1, Student s2) {
-				return s1.compareTo(s2);
-			}
-		});
+		Collections.sort(sortedStudents);
 		for(Student s : sortedStudents) {
 			System.out.println(s.getName());
 		}

@@ -34,11 +34,11 @@ public class InitPanel extends JPanel {
 	private JComboBox<String> cmbCourses;
 	private Controller controller;
 	
-	public InitPanel(Controller controller) {
+	public InitPanel(final Controller controller) {
 		this.controller = controller;
 		setLayout(new GridLayout(8,1));
 		FlowLayout leftFlow = new FlowLayout(FlowLayout.LEFT);
-		StudentFileReader sfr = new StudentFileReader();
+		final StudentFileReader sfr = new StudentFileReader();
 		DefaultComboBoxModel<String> mdlCourses = new DefaultComboBoxModel<String>();
 		for(String course : sfr.getCourses())  {
 			mdlCourses.addElement(course);

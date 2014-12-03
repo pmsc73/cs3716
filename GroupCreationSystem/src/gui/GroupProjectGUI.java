@@ -80,7 +80,7 @@ public class GroupProjectGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GroupProjectGUI(Controller controller) {
+	public GroupProjectGUI(final Controller controller) {
 		final Controller cont = controller;
 		final boolean prefSet = false;
 
@@ -135,7 +135,7 @@ public class GroupProjectGUI extends JFrame {
 		contentPane.add(txtSize);
 		txtSize.setColumns(10);
 
-		DefaultListModel<String> groupModel = new DefaultListModel<String>();
+		final DefaultListModel<String> groupModel = new DefaultListModel<String>();
 		// groupModel is a list of the group names, effectively
 
 		JButton btnDone = new JButton("Done");
@@ -160,7 +160,7 @@ public class GroupProjectGUI extends JFrame {
 				cont.setCourseNumber(courseName);
 				cont.setGroupSize(groupSize);
 				
-				StudentListPanel lstStuLeft = new StudentListPanel(controller);
+				final StudentListPanel lstStuLeft = new StudentListPanel(controller);
 				final StudentListPanel lstStuRight = new StudentListPanel(controller);
 				JPanel prefCenter = new JPanel(new GridLayout(1,2));
 				
@@ -169,9 +169,9 @@ public class GroupProjectGUI extends JFrame {
 				preferencesPanel.add(prefCenter,BorderLayout.CENTER);
 				preferencesPanel.add(new JLabel("Pick two students for instructor preferences"),BorderLayout.NORTH);
 				JPanel prefSouth = new JPanel(new FlowLayout(FlowLayout.CENTER,32,5));
-				JButton btnForce = new JButton("Force");
-				JButton btnDisallow = new JButton("Disallow");
-				JButton btnCreate = new JButton("Create");
+				final JButton btnForce = new JButton("Force");
+				final JButton btnDisallow = new JButton("Disallow");
+				final JButton btnCreate = new JButton("Create");
 				prefSouth.add(btnForce);
 				prefSouth.add(btnDisallow);
 				prefSouth.add(btnCreate);
@@ -209,7 +209,7 @@ public class GroupProjectGUI extends JFrame {
 						}
 						groupModel.addElement("Unassigned");
 		
-						JList<String> groupList = new JList<String>(groupModel);
+						final JList<String> groupList = new JList<String>(groupModel);
 						// groupList is a list who implements the model
 						groupList.setBounds(0, 0, 109, 230);
 						groupList.setBorder(null);

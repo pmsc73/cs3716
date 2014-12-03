@@ -72,7 +72,7 @@ public class MovePanel extends JPanel {
 		groupModel.addElement("Unassigned");
 
 		// Group list
-		JList<String> lstGroups = new JList<>();
+		final JList<String> lstGroups = new JList<String>();
 		scrlGroups.setViewportView(lstGroups);
 		lstGroups.setModel(groupModel);
 
@@ -95,7 +95,7 @@ public class MovePanel extends JPanel {
 		// lmModel is like groupModel but for the GROUP MEMBER LIST
 
 		// Group member list
-		JList<String> lstMembers = new JList<>(lmModel);
+		final JList<String> lstMembers = new JList<String>(lmModel);
 
 		// debugging
 		for (Group g : groups) {
@@ -179,7 +179,7 @@ public class MovePanel extends JPanel {
 		}
 		moveGroupModel.addElement("Unassigned");
 
-		JComboBox<String> cmbMoveGroupList = new JComboBox<String>();
+		final JComboBox<String> cmbMoveGroupList = new JComboBox<String>();
 		cmbMoveGroupList.setBounds(144, 226, 92, 20);
 		cmbMoveGroupList.setModel(moveGroupModel);
 		this.add(cmbMoveGroupList);

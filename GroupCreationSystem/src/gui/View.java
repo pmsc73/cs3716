@@ -22,7 +22,7 @@ public class View extends JFrame{
 	private Controller controller;
 
 	public View() {
-		Controller controller = new Controller();
+		final Controller controller = new Controller();
 		//projGui = new GroupProjectGUI(view.controller);
 		//projGui.setVisible(true);
 
@@ -30,14 +30,14 @@ public class View extends JFrame{
 		setPreferredSize(new Dimension(WINDOW_WIDTH,WINDOW_HEIGHT));
 		setBounds(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
 		setVisible(true);
-		JPanel panels = new JPanel();
+		final JPanel panels = new JPanel();
 		panels.setBounds(0,0,640,480);
-		CardLayout frameCards = new CardLayout();
+		final CardLayout frameCards = new CardLayout();
 		panels.setLayout(frameCards);
 		InitPanel init = new InitPanel(controller);
-		PreferencePanel pref = new PreferencePanel(controller);
-		MovePanel move = new MovePanel(controller);
-		ShowGroupsPanel show = new ShowGroupsPanel(controller);
+		final PreferencePanel pref = new PreferencePanel(controller);
+		final MovePanel move = new MovePanel(controller);
+		final ShowGroupsPanel show = new ShowGroupsPanel(controller);
 		panels.add(init,"init");
 		panels.add(pref,"pref");
 		panels.add(move, "move");
