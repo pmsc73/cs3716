@@ -16,8 +16,8 @@ import utility.Controller;
  *
  */
 public class View extends JFrame{
-	private static final int WINDOW_WIDTH = 640;
-	private static final int WINDOW_HEIGHT = 480;
+	private static final int WINDOW_WIDTH = 460;
+	private static final int WINDOW_HEIGHT = 360;
 	private static GroupProjectGUI projGui;
 	private Controller controller;
 
@@ -30,7 +30,7 @@ public class View extends JFrame{
 		//projGui = new GroupProjectGUI(view.controller);
 		//projGui.setVisible(true);
 
-		
+		setTitle("Group Project Grouping System");
 		setPreferredSize(new Dimension(WINDOW_WIDTH,WINDOW_HEIGHT));
 		setBounds(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
 		setVisible(true);
@@ -50,7 +50,7 @@ public class View extends JFrame{
 		
 		init.addNextListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(controller.getSkillBased()) {
+				if(!controller.getSkillBased()) {
 					frameCards.show(panels,"pref");
 				}
 				else {

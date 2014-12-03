@@ -22,7 +22,7 @@ public class Controller {
 	
 	private String courseNumber;
 	private int groupSize;
-	private boolean skillBased=false;
+	private boolean skillBased=true;
 	private double deadline;
 	private String instructor;
 	private GroupManager creator;

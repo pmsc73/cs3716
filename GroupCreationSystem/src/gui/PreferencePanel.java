@@ -47,8 +47,8 @@ public class PreferencePanel extends JPanel {
 	
 	private boolean done=false;
 	
-	public static final int WINDOW_WIDTH = 640;
-	public static final int WINDOW_HEIGHT = 480;
+	public static final int WINDOW_WIDTH = 440;
+	public static final int WINDOW_HEIGHT = 330;
 	
 	public void addComponents() {
 		setLayout(new BorderLayout());
