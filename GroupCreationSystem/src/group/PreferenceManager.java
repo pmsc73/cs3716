@@ -5,7 +5,11 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import utility.Student;
-
+/****
+ * This is a class to manage the adding of instructor preferences
+ * @author Emily Innes
+ *
+ ****/
 public class PreferenceManager {
 	private HashSet<Preference> requiredGroups;
 	private HashSet<Preference> disallowedGroups;
@@ -84,6 +88,9 @@ public class PreferenceManager {
 	public boolean hasRequiredSets(){
 		return requiredGroups.size()>0;
 	}
+	/****
+	 * A method to specify a preference between two students
+	 ****/
 	public void specifyPreference(Student s1, Student s2, int pref){
 		if(s1.equals(s2))return;
 		if(pref==1){
@@ -94,6 +101,9 @@ public class PreferenceManager {
 		}
 		hasPreferences=true;
 	}
+	/****
+	 * A method to remove an existing preference between two students
+	 ****/
 	public void removePreference(Student s1, Student s2, int pref){
 		if(s1.equals(s2))return;
 		if(pref==1){
@@ -104,6 +114,9 @@ public class PreferenceManager {
 		}
 		if(disallowedGroups.size()==0&&requiredGroups.size()==0)hasPreferences=false;
 	}
+	/****
+	 * Method to determine if any preferences have been added to the manager
+	 ****/
 	public boolean hasPreferences(){
 		return hasPreferences;
 	}

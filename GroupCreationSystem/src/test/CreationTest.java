@@ -14,41 +14,29 @@ import utility.Controller;
 import utility.Group;
 import utility.Student;
 
-/**
+/****
+ * Test class to test that group distribution works properly
  * @author Emily
  *
- */
+ ****/
 public class CreationTest {
 	public static void main(String[] args){
-		/*System.out.println("Creation Test with group size 3, negative preferences only\n____________________________________");
-		negativePreferenceCreation(3);
-		System.out.println("Creation Test with group size 4, negative preferences only\n____________________________________");
-		negativePreferenceCreation(4);
-		System.out.println("Creation Test with group size 5, negative preferences only\n____________________________________");
-		negativePreferenceCreation(5);
-		System.out.println("Creation Test with group size 2, postive preferences only\n____________________________________");
-		positivePreferenceCreation(2);
-		System.out.println("Creation Test with group size 4, postive preferences only\n____________________________________");
-		positivePreferenceCreation(4);
-		System.out.println("Creation Test with group size 5, postive preferences only\n____________________________________");
-		positivePreferenceCreation(5);
-		System.out.println("Creation Test with group size 4, random preferences\n____________________________________");
-		mixedPreferenceCreation(4);*/
-		for(int i=1;i<=17;i++){
-			testMemberDivision(17,i);
-		}
-		for(int i=1;i<14;i++){
-			testMemberDivision(14,i);
-		}
+			testMemberDivision(17,3);
+			testMemberDivision(17,5);
+			testMemberDivision(14,3);
+			testMemberDivision(14,4);
+			mixedPreferenceCreation("cs3716",4);
+			mixedPreferenceCreation("cs4770",5);
+
 	}
 	/****
 	 * Method to test that students are properly added to groups when a variety of preferences have been specified
 	 * 
 	 ****/
-	private static void mixedPreferenceCreation(int groupSize) {
+	private static void mixedPreferenceCreation(String courseName,int groupSize) {
 		Controller control = new Controller();
 		control.setGroupSize(groupSize);
-		control.setCourseNumber("cs3716");
+		control.setCourseNumber(courseName);
 		control.finalizeParameters();
 		ArrayList<Student> students =(ArrayList<Student>)control.getAllStudents();
 		Random r= new Random();
@@ -77,10 +65,10 @@ public class CreationTest {
 	/****
 	 * Method to test that group creation works with preferences
 	 *****/
-	public static void negativePreferenceCreation(int groupSize){
+	public static void negativePreferenceCreation(String courseName,int groupSize){
 		Controller control = new Controller();
 		control.setGroupSize(groupSize);
-		control.setCourseNumber("cs3716");
+		control.setCourseNumber(courseName);
 		control.finalizeParameters();
 		ArrayList<Student> students =(ArrayList<Student>)control.getAllStudents();
 		Random r= new Random();
@@ -100,10 +88,10 @@ public class CreationTest {
 		}
 		
 	}
-	public static void positivePreferenceCreation(int groupSize){
+	public static void positivePreferenceCreation(String courseName,int groupSize){
 		Controller control = new Controller();
 		control.setGroupSize(groupSize);
-		control.setCourseNumber("cs3716");
+		control.setCourseNumber(courseName);
 		control.finalizeParameters();
 		ArrayList<Student> students =(ArrayList<Student>)control.getAllStudents();
 		Random r= new Random();

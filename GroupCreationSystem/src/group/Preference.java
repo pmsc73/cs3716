@@ -39,10 +39,10 @@ public class Preference {
 	public boolean involves(Student s){
 		return student1.equals(s)||student2.equals(s);
 	}
-	/**
-	 * @param s
-	 * @return
-	 */
+	/****
+	 * @param s  The student whose partner is being found
+	 * @return The student's partner
+	 *****/
 	public Student getPartner(Student s) {
 		if (s.equals(student1)) return student2;
 		if (s.equals(student2)) return student1;

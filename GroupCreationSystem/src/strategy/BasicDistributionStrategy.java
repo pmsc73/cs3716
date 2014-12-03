@@ -11,7 +11,7 @@ import utility.Student;
 import group.CreateGroupStrategy;
 
 /****
- * Basic strategy for dividing students into groups.
+ * Basic strategy for dividing students into groups. Sorts based on GPA.
  * 
  * @author Emily
  *
