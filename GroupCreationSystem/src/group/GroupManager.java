@@ -62,12 +62,21 @@ public class GroupManager {
 			}
 		}
 		else{
-			int numSmallGroups= maxCap-(numStudents%maxCap);
-			for(int i=0;i<numGroups+1;i++){
+			if(maxCap<numStudents/2){
+				int numSmallGroups= Math.min(numStudents/maxCap,maxCap-(numStudents%maxCap));
+				for(int i=0;i<numGroups+1;i++){
 					groupSizes.add(maxCap);
+				}	
+			
+				for(int i=numGroups;i>numGroups-numSmallGroups;i--){
+					groupSizes.set(i, maxCap-1);
+				}
 			}
-			for(int i=numGroups;i>numGroups-numSmallGroups;i--){
-				groupSizes.set(i, maxCap-1);
+			else{
+				for(int i=0;i<numGroups;i++){
+					groupSizes.add(maxCap);
+				}
+				groupSizes.add(numStudents%maxCap);
 			}
 			
 		}
