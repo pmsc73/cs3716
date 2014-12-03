@@ -25,6 +25,9 @@ public class StudentFileReader implements StudentReader {
 		 * @param path: path to file with list in it
 		 * @return studentList 
 		 ****/
+		if(path.equals(".dat")) {
+			return new ArrayList<Student>();
+		}
 		Collection<Student> studentList = new ArrayList<Student>();
 		try { // needs to be in try block because Scanner throws FileNotFound
 			

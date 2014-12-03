@@ -98,11 +98,7 @@ public class PreferencePanel extends JPanel {
 		mdlPreference.addElement("cannot work together");
 		cmbPreference = new JComboBox<String>(mdlPreference);
 		btnNext = new JButton("Next");
-		btnNext.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				done = true;
-			}
-		});
+		
 		btnAddPref = new JButton("Confirm");
 		btnAddPref.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -113,6 +109,9 @@ public class PreferencePanel extends JPanel {
 	}
 	public boolean isDone() {
 		return done;
+	}
+	public void addNextListener(ActionListener buttonListener) {
+		btnNext.addActionListener(buttonListener);
 	}
 	public void addPreferenceToList() {
 		String prefString = "";

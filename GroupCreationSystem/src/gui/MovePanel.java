@@ -31,6 +31,7 @@ import utility.Student;
  */
 public class MovePanel extends JPanel {
 	private Controller cont;
+	private JButton btnFinalize;
 	private boolean done = false;
 	/**
 	 * Create the panel.
@@ -218,14 +219,13 @@ public class MovePanel extends JPanel {
 		});
 		this.add(btnMove);
 
-		JButton btnFinalize = new JButton("FINALIZE");
-		btnFinalize.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				done = true;
-			}
-		});
+		btnFinalize = new JButton("FINALIZE");
+		
 		btnFinalize.setBounds(340, 292, 89, 23);
 		this.add(btnFinalize);
+	}
+	public void addNextListener(ActionListener buttonListener) {
+		btnFinalize.addActionListener(buttonListener);
 	}
 	public boolean isDone() {
 		return done;

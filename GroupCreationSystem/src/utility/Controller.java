@@ -22,7 +22,7 @@ public class Controller {
 	
 	private String courseNumber;
 	private int groupSize;
-	private boolean skillBased;
+	private boolean skillBased=false;
 	private double deadline;
 	private String instructor;
 	private GroupManager creator;
@@ -41,6 +41,12 @@ public class Controller {
 	 * This is the method used once all of the parameters have been entered. Starts creation of empty groups.
 	 * 
 	 ****/
+	public void setSkillBased(boolean b) {
+		skillBased = b;
+	}
+	public boolean getSkillBased() {
+		return skillBased;
+	}
 	public void finalizeParameters(){
 		initialize();
 		setCourseNumber(courseNumber);
